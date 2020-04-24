@@ -52,20 +52,20 @@ class UrlManager extends \yii\web\UrlManager
                 return ['/news' , ['id' => $page->id]];
             }
         }
-        // if(strpos($path, 'category') === 0){
-        //     $page = Category::find()->where(['slug' => '/' . $path])->one();
-        //     if($page){
-        //         \Yii::$app->params['page'] = $page;
-        //         return ['/category' , ['id' => $page->id]];
-        //     }
-        // }
-        // if(strpos($path, 'product') === 0){
-        //     $page = Products::find()->where(['slug' => '/' . $path])->one();
-        //     if($page){
-        //         \Yii::$app->params['page'] = new Page();
-        //         return ['/product' , ['id' => $page->id]];
-        //     }
-        // }
+        if(strpos($path, 'category') === 0){
+            $page = Category::find()->where(['slug' => '/' . $path])->one();
+            if($page){
+                \Yii::$app->params['page'] = $page;
+                return ['/category' , ['id' => $page->id]];
+            }
+        }
+        if(strpos($path, 'product') === 0){
+            $page = Products::find()->where(['slug' => '/' . $path])->one();
+            if($page){
+                \Yii::$app->params['page'] = new Page();
+                return ['/product' , ['id' => $page->id]];
+            }
+        }
         
         $seourl = SeoUrl::find()->where(['slug' => '/' . $path])->one();
         if($seourl && $seourl->module == 'catalog'){

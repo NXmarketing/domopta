@@ -394,7 +394,7 @@ $this->registerJsFile('/js/lightslider.js',['depends' => \yii\web\JqueryAsset::c
                         <li class="footer__item">
                             <div class="common footer__common">
                                 <a href="#" class="common__heading">Адрес</a>
-                                <ul class="common__list">
+                                <ul class="common__list footer_common__list">
                                     <li class="common__item common__item_flex common__item_mb">
                                         <div class="common__icon">
                                             <svg class="svg common__svg common__svg_place">

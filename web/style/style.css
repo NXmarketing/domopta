@@ -2967,6 +2967,8 @@ input:-webkit-autofill {
 
 .common__list {
   padding-top: 10px;
+}
+.common__list:not(.footer_common__list) {
   overflow: hidden;
 }
 

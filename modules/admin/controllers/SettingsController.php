@@ -79,6 +79,8 @@ class SettingsController extends Controller
         ];
     }
 
+
+    
     public function beforeAction($action)
     {
         Yii::$app->i18n->translations['extensions/yii2-settings/*'] = [

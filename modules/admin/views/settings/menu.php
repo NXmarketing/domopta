@@ -9,6 +9,7 @@ use yii\bootstrap\Nav;
         ['label' => 'Основные', 'url' => ['/admin/settings']],
         ['label' => 'Контакты', 'url' => ['/admin/settings/auth']],
         ['label' => 'Электронные письма', 'url' => ['/admin/settings/emails']],
+        ['label' => 'Настройки почты', 'url' => ['/admin/settings/mail']],
         ['label' => 'Уведомления пользователю', 'url' => ['/admin/settings/notify']],
         ['label' => 'Подсказки для ценовых категорий', 'url' => ['/admin/settings/hint']],
     ],

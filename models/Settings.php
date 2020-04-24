@@ -28,6 +28,17 @@ class Settings extends Model
     public $schema;
     public $rekvizit;
 
+    public $smtpHost;
+    public $smtpEmail;
+    public $smtpPassword;
+    public $smtpPort;
+    public $smtpEncryption;
+    public $smtpStreamOptionsSslVerifyPeer;
+    public $smtpStreamOptionsSslAllowSelfSigned;
+
+    // 'host' => 'smtp.yandex.ru',
+    // 'username' => 'domopta@domopta.ru',
+    // 'password' => 'Y1HuAB-SS%qMOgxc1X@)',
 
     public $social_instagram;
     public $social_vk;
@@ -58,6 +69,9 @@ class Settings extends Model
             [['contacts'], 'string', 'on' => 'main'],
             [['hint1', 'hint2','hint3',], 'string', 'on' => 'hint'],
             [['adminEmail', 'sellEmail'], 'email', 'on' => 'auth'],
+            [['smtpEmail'], 'email', 'on' => 'mail'],
+            [['smtpHost', 'smtpPassword', 'smtpPort', 'smtpEncryption'], 'string', 'on' => 'mail'],
+            [['smtpStreamOptionsSslVerifyPeer', 'smtpStreamOptionsSslAllowSelfSigned'], 'boolean', 'on' => 'mail'],
             [['addresses', 'phone_call','time', 'schema', 'rekvizit', 'phone_order', 'phone_admin', 'social_instagram', 'social_viber', 'social_vk', 'social_whatsapp', 'phone', 'footer'], 'safe', 'on' => 'auth'],
             [['email_active', 'email_success', 'email_block', 'email_order', 'email_unblock', 'email_delete', 'email_confirm'], 'safe', 'on' => 'emails'],
             [['notify_unactive', 'notify_noconfirmed', 'notify_product_absend'], 'safe', 'on' => 'notify'],
@@ -66,12 +80,11 @@ class Settings extends Model
 
     public function fields()
     {
-        return ['time', 'schema', 'rekvizit','phone_call', 'phone_order', 'phone_admin', 'phone', 'contacts', 'addresses', 'adminEmail', 'sellEmail', 'email_active', 'email_success', 'email_block', 'email_order', 'email_unblock', 'email_delete', 'email_confirm', 'notify_unactive', 'notify_noconfirmed', 'notify_product_absend', 'social_instagram', 'social_viber', 'social_vk', 'social_whatsapp', 'hint1', 'hint2','hint3', 'footer'];
+        return ['time', 'schema', 'rekvizit','phone_call', 'phone_order', 'phone_admin', 'phone', 'contacts', 'addresses', 'adminEmail','smtpEmail', 'smtpPassword', 'smtpPort', 'smtpEncryption', 'smtpStreamOptionsSslVerifyPeer', 'smtpStreamOptionsSslAllowSelfSigned', 'smtpHost', 'sellEmail', 'email_active', 'email_success', 'email_block', 'email_order', 'email_unblock', 'email_delete', 'email_confirm', 'notify_unactive', 'notify_noconfirmed', 'notify_product_absend', 'social_instagram', 'social_viber', 'social_vk', 'social_whatsapp', 'hint1', 'hint2','hint3', 'footer'];
     }
     public function attributes()
     {
-        return ['time', 'schema', 'rekvizit','phone_call', 'phone_order', 'phone_admin', 'phone', 'contacts', 'addresses', 'adminEmail', 'sellEmail', 'email_active', 'email_success', 'email_block', 'email_order', 'email_unblock', 'email_delete', 'email_confirm', 'notify_unactive', 'notify_noconfirmed', 'notify_product_absend', 'social_instagram', 'social_viber', 'social_vk', 'social_whatsapp', 'hint1', 'hint2','hint3', 'footer'];
-
+        return ['time', 'schema', 'rekvizit','phone_call', 'phone_order', 'phone_admin', 'phone', 'contacts', 'addresses', 'adminEmail', 'smtpEmail','smtpHost','smtpPassword','smtpPort','smtpEncryption','smtpStreamOptionsSslVerifyPeer','smtpStreamOptionsSslAllowSelfSigned','sellEmail', 'email_active', 'email_success', 'email_block', 'email_order', 'email_unblock', 'email_delete', 'email_confirm', 'notify_unactive', 'notify_noconfirmed', 'notify_product_absend', 'social_instagram', 'social_viber', 'social_vk', 'social_whatsapp', 'hint1', 'hint2','hint3', 'footer'];
     }
 
     public function attributeLabels()
@@ -80,6 +93,13 @@ class Settings extends Model
             'addresses' => 'Адрес',
             'contacts' => 'Контакты',
             'adminEmail' => 'Email администратора',
+            'smtpHost' => 'SMTP Host',
+            'smtpEmail' => 'SMTP Username',
+            'smtpPassword' => 'SMTP Password',
+            'smtpPort' => 'SMTP Port (587)',
+            'smtpEncryption' => 'SMTP Encryption (tls)',
+            'smtpStreamOptionsSslVerifyPeer' => 'SMTP Stream Option SSL Verify Peer (false)',
+            'smtpStreamOptionsSslAllowSelfSigned' => 'SMTP Stream Option SSL Allow Self Signed (true)',
             'sellEmail' => 'Email отдел заказов',
             'email_active' => 'Отправляется пользователю при активации его учетной записи',
             'email_confirm' => 'Отправляется пользователю при успешной регистрации',

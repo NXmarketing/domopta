@@ -58,6 +58,12 @@ class SettingsController extends Controller
                 'scenario' => 'emails',	// Change if you want to re-use the model for multiple setting form.
                 'viewName' => 'emails'	// The form we need to render
             ],
+            'mail' => [
+                'class' => 'pheme\settings\SettingsAction',
+                'modelClass' => 'app\models\Settings',
+                'scenario' => 'mail',	// Change if you want to re-use the model for multiple setting form.
+                'viewName' => 'mail'	// The form we need to render
+            ],
             'notify' => [
                 'class' => 'pheme\settings\SettingsAction',
                 'modelClass' => 'app\models\Settings',

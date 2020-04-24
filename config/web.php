@@ -18,32 +18,43 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
-	        'loginUrl' => '/signin'
+            'loginUrl' => '/signin'
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.yandex.ru',
-                'username' => 'domopta@domopta.ru',
-                'password' => 'Y1HuAB-SS%qMOgxc1X@)',
-                'port' => 587,
-                'encryption' => 'tls',
-                'streamOptions' => [
-                    'ssl' => [
-                        'verify_peer' => false,
-                        'allow_self_signed' => true
+        'mailer' => function () {
+            return \Yii::createObject([
+                'class' => 'yii\swiftmailer\Mailer',
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => \Yii::$app->settings->get('Settings.smtpHost'),
+                    'username' => \Yii::$app->settings->get('Settings.smtpEmail'),
+                    'password' => \Yii::$app->settings->get('Settings.smtpPassword'),
+                    'port' => \Yii::$app->settings->get('Settings.smtpPort'),
+                    'encryption' => \Yii::$app->settings->get('Settings.smtpEncryption'),
+                    'streamOptions' => [
+                        'ssl' => [
+                            'verify_peer' => !!Yii::$app->settings->get('Settings.smtpStreamOptionsSslVerifyPeer'),
+                            'allow_self_signed' => !!Yii::$app->settings->get('Settings.smtpStreamOptionsSslAllowSelfSigned')
+                        ],
                     ],
                 ],
-            ],
-            'useFileTransport' => false
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-        ],
+                'useFileTransport' => false
+                // send all mails to a file by default. You have to set
+                // 'useFileTransport' to false and configure a transport
+                // for the mailer to send real emails.
+            ]);
+
+
+            // public $smtpHost;
+            // public $smtpEmail;
+            // public $smtpPassword;
+            // public $smtpPort;
+            // public $smtpEncryption;
+            // public $smtpStreamOptionsSslVerifyPeer;
+            // public $smtpStreamOptionsSslAllowSelfSigned;
+        },
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -61,12 +72,12 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'sitemap.xml' => 'site/sitemap',
-//                'admin' => 'admin',
-//                'admin/<controller>' => 'admin/<controller>',
-//                'admin/<controller>/<action>' => 'admin/<controller>/<action>',
-//                'admin/user' => 'user/admin',
-//                '' => 'site/slug',
-//                '<slug:.*>' => 'site/slug'
+                //                'admin' => 'admin',
+                //                'admin/<controller>' => 'admin/<controller>',
+                //                'admin/<controller>/<action>' => 'admin/<controller>/<action>',
+                //                'admin/user' => 'user/admin',
+                //                '' => 'site/slug',
+                //                '<slug:.*>' => 'site/slug'
             ],
         ],
         'view' => [
@@ -78,14 +89,14 @@ $config = [
         ],
         'settings' => [
             'class' => 'pheme\settings\components\Settings',
-	        'modelClass' => '\app\models\Settings2'
+            'modelClass' => '\app\models\Settings2'
         ],
 
         'i18n' => [
             'translations' => [
                 'file-input*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => dirname(__FILE__).'/../vendor/2amigos/yii2-file-input-widget/src/messages/',
+                    'basePath' => dirname(__FILE__) . '/../vendor/2amigos/yii2-file-input-widget/src/messages/',
                 ],
             ],
         ],
@@ -102,35 +113,35 @@ $config = [
         ],
 
         'sms' => [
-	        'class'    => 'ladamalina\smsc\Smsc',
-	        'login'     => 'LegkiyVeter',  // login
-	        'password'   => 'phyqkWg4iAY4Wns', // plain password or lowercase password MD5-hash
-	        'post' => true, // use http POST method
-	        'https' => true,    // use secure HTTPS connection
-	        'charset' => 'utf-8',   // charset: windows-1251, koi8-r or utf-8 (default)
-	        'debug' => false,    // debug mode
+            'class'    => 'ladamalina\smsc\Smsc',
+            'login'     => 'LegkiyVeter',  // login
+            'password'   => 'phyqkWg4iAY4Wns', // plain password or lowercase password MD5-hash
+            'post' => true, // use http POST method
+            'https' => true,    // use secure HTTPS connection
+            'charset' => 'utf-8',   // charset: windows-1251, koi8-r or utf-8 (default)
+            'debug' => false,    // debug mode
         ],
         'reCaptcha' => [
-	        'name' => 'reCaptcha',
-	        'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
-	        'siteKey' => '6Lf_rYwUAAAAAGAUXG-oRX4uOQpSoZGYRTSviiP8',
-	        'secret' => '6Lf_rYwUAAAAAMxaG48CBE00MFBdUw3xApmWtuTV',
+            'name' => 'reCaptcha',
+            'class' => 'himiklab\yii2\recaptcha\ReCaptcha',
+            'siteKey' => '6Lf_rYwUAAAAAGAUXG-oRX4uOQpSoZGYRTSviiP8',
+            'secret' => '6Lf_rYwUAAAAAMxaG48CBE00MFBdUw3xApmWtuTV',
         ],
 
         'authClientCollection' => [
-	        'class'   => \yii\authclient\Collection::className(),
-	        'clients' => [
-		        'vkontakte' => [
-			        'class'        => 'dektrium\user\clients\VKontakte',
-			        'clientId'     => 6852063,
-			        'clientSecret' => 'bECDFSuJ5P8GTXJNuiV4',
-		        ]
-	        ],
+            'class'   => \yii\authclient\Collection::className(),
+            'clients' => [
+                'vkontakte' => [
+                    'class'        => 'dektrium\user\clients\VKontakte',
+                    'clientId'     => 6852063,
+                    'clientSecret' => 'bECDFSuJ5P8GTXJNuiV4',
+                ]
+            ],
         ],
 
         'telegram' => [
-	        'class' => 'aki\telegram\Telegram',
-	        'botToken' => '675807352:AAGVZH2o4q_3SORnEQrzi8-PH4pFmcGDLLY',
+            'class' => 'aki\telegram\Telegram',
+            'botToken' => '675807352:AAGVZH2o4q_3SORnEQrzi8-PH4pFmcGDLLY',
         ]
 
     ],
@@ -138,19 +149,19 @@ $config = [
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
-//            'enableGeneratingPassword' => true,
+            //            'enableGeneratingPassword' => true,
             'controllerMap' => [
                 'admin' => [
                     'class' => 'app\modules\admin\controllers\UserController',
-                    'on ' . \dektrium\user\controllers\AdminController::EVENT_BEFORE_ACTION => function($e){
+                    'on ' . \dektrium\user\controllers\AdminController::EVENT_BEFORE_ACTION => function ($e) {
                         $e->action->controller->layout = '@app/views/layouts/admin';
                     }
                 ],
                 'registration' => [
                     'class' => \dektrium\user\controllers\RegistrationController::className(),
-                    'on ' . \dektrium\user\controllers\RegistrationController::EVENT_AFTER_CONFIRM => function($e){
+                    'on ' . \dektrium\user\controllers\RegistrationController::EVENT_AFTER_CONFIRM => function ($e) {
                         Yii::$app->user->identity->mailer->sendSuccessMessage(Yii::$app->user->identity);
-                        if(!Yii::$app->user->identity->getIsActive()){
+                        if (!Yii::$app->user->identity->getIsActive()) {
                             Yii::$app->session->setFlash('login', Yii::$app->settings->get('Settings.notify_unactive'));
                         }
                     }
@@ -181,8 +192,8 @@ if (YII_ENV_DEV) {
     //$config['bootstrap'][] = 'debug';
     //$config['modules']['debug'] = [
     //    'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+    // uncomment the following to add your IP if you are not connecting from localhost.
+    //'allowedIPs' => ['127.0.0.1', '::1'],
     //];
 
     $config['bootstrap'][] = 'gii';

@@ -13,13 +13,6 @@ use yii\helpers\Url;
 
 echo $this->render('menu');
 
-Yii::$app->mailer->compose()
-    ->setFrom('domopta@domopta.ru')
-    ->setTo('pimax1978@icloud.com')
-    ->setSubject('Тема сообщения')
-    ->setTextBody('Текст сообщения')
-    ->setHtmlBody('<b>текст сообщения в формате HTML</b>')
-    ->send();
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <?php echo $form->field($model, 'smtpHost') ?>

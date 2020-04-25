@@ -4,6 +4,12 @@
     font-weight: 300;
     font-style: normal;
 }
+    @font-face {
+    font-family: 'TTCommons-Light.woff';
+    src: url("/fonts/TTCommons-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
 
 @font-face {
     font-family: 'TTCommons-Medium.woff';

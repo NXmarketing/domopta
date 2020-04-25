@@ -21,7 +21,8 @@ $config = [
             'loginUrl' => '/signin'
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            // 'errorAction' => 'site/error',
+            'errorAction' => '', 
         ],
         'mailer' => function () {
             return \Yii::createObject([
@@ -142,7 +143,13 @@ $config = [
         'telegram' => [
             'class' => 'aki\telegram\Telegram',
             'botToken' => '675807352:AAGVZH2o4q_3SORnEQrzi8-PH4pFmcGDLLY',
-        ]
+        ],
+        'session' => [
+            'class' => 'yii\web\DbSession',
+            'writeCallback' => function () {
+                return ['user_id' => \Yii::$app->user->id];
+            },
+        ],
 
     ],
     'params' => $params,

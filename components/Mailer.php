@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: resh
@@ -152,11 +153,11 @@ class Mailer extends \dektrium\user\Mailer
     {
         $subject = 'Вы успешно зарегистрировались';
         $body = \Yii::$app->settings->get('Settings.email_success');
-        if($token){
+        if ($token) {
             $body = str_replace('{%link%}', Html::a(Html::encode($token->url), $token->url), $body);
         }
         //if($showPassword || $this->module->enableGeneratingPassword){
-            $body = str_replace('{%password%}', $user->password, $body);
+        $body = str_replace('{%password%}', $user->password, $body);
         //}
         $this->sendEmail($user->email, $subject, $body);
     }
@@ -203,36 +204,41 @@ class Mailer extends \dektrium\user\Mailer
     }
 
 
-    public function sendActivate(\dektrium\user\models\User $user){
-//        $subject = 'Ваш аккаунт активирован';
-//        $body = \Yii::$app->settings->get('Settings.email_active');
-//        //$body = str_replace('{%link%}', Html::a(Html::encode($token->url), $token->url), $body);
-//        $this->sendEmail($user->email, $subject, $body);
+    public function sendActivate(\dektrium\user\models\User $user)
+    {
+        //        $subject = 'Ваш аккаунт активирован';
+        //        $body = \Yii::$app->settings->get('Settings.email_active');
+        //        //$body = str_replace('{%link%}', Html::a(Html::encode($token->url), $token->url), $body);
+        //        $this->sendEmail($user->email, $subject, $body);
     }
 
-    public function sendBlock(\dektrium\user\models\User $user){
+    public function sendBlock(\dektrium\user\models\User $user)
+    {
         $subject = 'Ваш аккаунт заблокирован';
         $body = \Yii::$app->settings->get('Settings.email_block');
         $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
         $this->sendEmail($user->email, $subject, $body);
     }
-    public function sendUnblock(\dektrium\user\models\User $user){
+    public function sendUnblock(\dektrium\user\models\User $user)
+    {
         $subject = 'Ваш аккаунт разблокирован';
         $body = \Yii::$app->settings->get('Settings.email_unblock');
-//        $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
+        //        $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
         $this->sendEmail($user->email, $subject, $body);
     }
 
-    public function sendDelete(\dektrium\user\models\User $user){
+    public function sendDelete(\dektrium\user\models\User $user)
+    {
         $subject = 'Ваш аккаунт удален';
         $body = \Yii::$app->settings->get('Settings.email_delete');
-//        $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
+        //        $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
         $this->sendEmail($user->email, $subject, $body);
     }
-    public function sendOrder(\dektrium\user\models\User $user){
+    public function sendOrder(\dektrium\user\models\User $user)
+    {
         $subject = 'Ваш Заказ успешно оформлен и отправлен в Отдел Заказов';
         $body = \Yii::$app->settings->get('Settings.email_order');
-//        $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
+        //        $body = str_replace('{%comment%}', $user->profile->admins_comment, $body);
         $this->sendEmail($user->email, $subject, $body);
     }
 
@@ -279,24 +285,33 @@ class Mailer extends \dektrium\user\Mailer
     }
 
 
-    public function sendEmail($to, $subject, $body){
+    public function sendEmail($to, $subject, $body)
+    {
 
-        if(!$to){
+        if (!$to) {
             return false;
         }
-        \Yii::$app->mailer->compose()
-            ->setTo($to)
-            ->setFrom('domopta@domopta.ru')
-//            ->setFrom(\Yii::$app->settings->get('Settings.adminEmail'))
-            ->setSubject($subject)
-            ->setHtmlBody($body)
-            ->send();
+        if (\Yii::$app->settings->get('Settings.smtpEmail') && \Yii::$app->settings->get('Settings.smtpHost') == 'smtp.yandex.ru') {
+            \Yii::$app->mailer->compose()
+                ->setTo($to)
+                ->setFrom(\Yii::$app->settings->get('Settings.smtpEmail'))
+                ->setSubject($subject)
+                ->setHtmlBody($body)
+                ->send();
+        } else {
+            \Yii::$app->mailer->compose()
+                ->setTo($to)
+                ->setFrom(\Yii::$app->settings->get('Settings.adminEmail'))
+                ->setSubject($subject)
+                ->setHtmlBody($body)
+                ->send();
+        }
     }
 
 
     protected function sendMessage($to, $subject, $view, $params = [])
     {
-        if(!$to){
+        if (!$to) {
             return false;
         }
         /** @var \yii\mail\BaseMailer $mailer */
@@ -314,5 +329,4 @@ class Mailer extends \dektrium\user\Mailer
             ->setSubject($subject)
             ->send();
     }
-
 }

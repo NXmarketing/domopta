@@ -294,10 +294,10 @@ class User extends \dektrium\user\models\User
         $return .= "<th>Ариткул</th>";
         $return .= "<th>Название</th>";
         $return .= "<th>Цвет</th>";
-        $return .= "<th>Кол-во</th>";
-        $return .= "<th>Цена за ед.</th>";
-        $return .= "<th>Сумма</th>";
-        $return .= "<th>Дата</th>";
+        $return .= "<th class=\"text-center\">Кол-во</th>";
+        $return .= "<th class=\"text-right\">Цена за ед.</th>";
+        $return .= "<th class=\"text-right\">Сумма</th>";
+        $return .= "<th class=\"text-center\">Дата</th>";
         $return .= "</tr>";
         $return .= "</thead>";
         $return .= "<tbody>";
@@ -327,7 +327,7 @@ class User extends \dektrium\user\models\User
                 $return .= "<td class=\"text-right text-nowrap\">";
                 $return .= number_format($detail->getSum(), 2, ', <span class="kopeyki">', '') . '</span>';
                 $return .= "</td>";
-                $return .= "<td>";
+                $return .= "<td class=\"text-center\">";
                 $return .= date("H:i d.m.y", $cart->created_at);
                 $return .= "</td>";
                 $return .= "</tr>";

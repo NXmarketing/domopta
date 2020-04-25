@@ -294,14 +294,15 @@ class User extends \dektrium\user\models\User
         $return .= "<th>Ариткул</th>";
         $return .= "<th>Название</th>";
         $return .= "<th>Цвет</th>";
-        $return .= "<th>Дата</th>";
         $return .= "<th>Кол-во</th>";
         $return .= "<th>Цена за ед.</th>";
         $return .= "<th>Сумма</th>";
+        $return .= "<th>Дата</th>";
         $return .= "</tr>";
         $return .= "</thead>";
         $return .= "<tbody>";
         $sum=0;
+        $amm = 0;
         foreach ($carts as $cart) {
             foreach ($cart->details as $detail) {
                 $return .= "<tr>";
@@ -317,9 +318,6 @@ class User extends \dektrium\user\models\User
                 $return .= "<td>";
                 $return .= $detail->color;
                 $return .= "</td>";
-                $return .= "<td>";
-                $return .= date("H:i d.m.y", $cart->created_at);
-                $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
                 $return .= $detail->amount;
                 $return .= "</td>";
@@ -329,12 +327,24 @@ class User extends \dektrium\user\models\User
                 $return .= "<td class=\"text-right text-nowrap\">";
                 $return .= number_format($detail->getSum(), 2, ', <span class="kopeyki">', '') . '</span>';
                 $return .= "</td>";
+                $return .= "<td>";
+                $return .= date("H:i d.m.y", $cart->created_at);
+                $return .= "</td>";
                 $return .= "</tr>";
                 $sum += $detail->getSum();
+                $amm += $detail->amount;
             }
         }
 
-        $return .= "</tbody><tfoot><td colspan=\"7\" class=\"text-right\"><strong>Итого:</strong></td><td class=\"text-right text-nowrap\"><strong>".number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>'."</strong></td></tfoot></table>";
+        $return .= "</tbody>";
+        $return .= "<tfoot>";
+        $return .= "<td colspan=\"4\"><strong>Итого:</strong></td>";
+        $return .= "<td class=\"text-right text-center\"><strong>".$amm."</strong></td>";
+        $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
+        $return .= "<td class=\"text-right text-nowrap\"><strong>".number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>'."</strong></td>";
+        $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
+        $return .= "</tfoot>";
+        $return .= "</table>";
         return $return;
     }
 }

@@ -533,6 +533,17 @@ input:-webkit-autofill {
   max-width: 560px;
 }
 
+
+@media screen and (max-width: 768px) {
+  .container_pop-small {
+    max-width: 430px;
+  }
+}
+@media screen and (max-width: 359px) {
+  .container_pop-small {
+    max-width: 320px;
+  }
+}
 #preloader {
   position: fixed;
   top: 0;
@@ -7789,6 +7800,26 @@ yx-axis
 .cart_popup .reg-pop-inner-cart{
     width: 515px;
     padding-left: 25px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .cart_popup{
+    margin-left: -215px;
+  }
+  .cart_popup .reg-pop-inner-cart{
+      width: 385px;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .cart_popup{
+    margin-left: -160px;
+  }
+  .cart_popup .reg-pop-inner-cart{
+      width: 275px;
+  }
 }
 
 .cart_popup_overley{

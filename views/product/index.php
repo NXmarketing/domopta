@@ -92,11 +92,20 @@ $next = $category->getNextproduct($model->id);
                                 </a>
                             </li>
                         </ul>
-                    </div> 
+                    </div>
                 </div>
                 <div class="tovar-left">
                     <div class="photos-tovar tovar__photos-tovar">
                         <div class="display display_p"></div>
+                        <style>
+                            .lSSlideOuter.vertical{
+                                padding-left: 55px;
+                                padding-right: 0!important;
+                            }
+                            .lSSlideOuter.vertical .lSGallery{
+                                left: 0;
+                            }
+                        </style>
                         <ul class="photos-tovar__list_p">
 	                        <?php $pictures = $model->pictures;?>
                             <?php if(!empty($pictures)): ?>
@@ -236,7 +245,7 @@ $next = $category->getNextproduct($model->id);
                                     <div class="tag-tovar__bottom">
                                         <span class="tag-tovar__text">Цена за 1 шт: &nbsp;&nbsp;&nbsp;</span>
                                         <span class="tag-tovar__price"><?php echo number_format($model->price, 2, ', <span class="kopeyki">', '') ?></span> &#8381;</span>
-                                        
+
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -277,7 +286,7 @@ $next = $category->getNextproduct($model->id);
                                     </span>
                                 </a>
                             </div>
-                        </div> 
+                        </div>
                     </div>
 
                     <div class="form-tovar tovar__form-tovar">
@@ -385,7 +394,7 @@ $next = $category->getNextproduct($model->id);
                                 </a>
                             </li>
                         </ul>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>

@@ -530,7 +530,7 @@ input:-webkit-autofill {
 }
 
 .container_pop-small {
-  max-width: 430px;
+  max-width: 560px;
 }
 
 #preloader {
@@ -7782,12 +7782,12 @@ yx-axis
   top: 50%;
   margin-top: -75px;
   left: 50%;
-  margin-left: -215px;
+  margin-left: -280px;
 
 }
 
 .cart_popup .reg-pop-inner-cart{
-    width: 385px;
+    width: 515px;
     padding-left: 25px;
 }
 

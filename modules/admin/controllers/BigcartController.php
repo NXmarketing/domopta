@@ -38,4 +38,8 @@ class BigcartController extends Controller {
 		return $this->render('index', ['dataProvider' => $dataProvider]);
 	}
 
+	public function actionCart($id){
+		return $this->render('cart', ['user' => User::findOne($id)]);
+	}
+
 }

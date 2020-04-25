@@ -48,7 +48,7 @@ use yii\helpers\Html;
 			[
 				'label' => 'Корзина',
 				'value' => function ($model) {
-					return $model->renderBigCart();
+					return Html::a("Смотреть содержимое корзины", ['/admin/bigcart/cart', 'id' => $model->id]);
 				},
 				'format' => 'raw'
 			]

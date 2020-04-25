@@ -297,6 +297,7 @@ class User extends \dektrium\user\models\User
         $return .= "<th class=\"text-center\">Кол-во</th>";
         $return .= "<th class=\"text-right\">Цена за ед.</th>";
         $return .= "<th class=\"text-right\">Сумма</th>";
+        $return .= "<th class=\"text-right\">Cтатус</th>";
         $return .= "<th class=\"text-center\">Дата</th>";
         $return .= "</tr>";
         $return .= "</thead>";
@@ -328,13 +329,17 @@ class User extends \dektrium\user\models\User
                 $return .= number_format($detail->getSum(), 2, ', <span class="kopeyki">', '') . '</span>';
                 $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
-                $return .= date("H:i d.m.y", $cart->created_at);
+                $return .= str_replace(" ", "&nbsp;", date("H:i d.m.y", $cart->created_at));
+                $return .= "</td>";
+                $return .= "<td class=\"text-center\">";
+                $return .= $cart->product->flag ? 'В&nbsp;наличии' : '<span style="color:red;">Продан</span>';
                 $return .= "</td>";
                 $return .= "</tr>";
                 $sum += $detail->getSum();
                 $amm += $detail->amount;
             }
         }
+        // Добавить новую колонку, статус товара (в наличии, продан (продан=красным цветом))
 
         $return .= "</tbody>";
         $return .= "<tfoot>";
@@ -342,6 +347,7 @@ class User extends \dektrium\user\models\User
         $return .= "<td class=\"text-right text-center\"><strong>".$amm."</strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong>".number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>'."</strong></td>";
+        $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "</tfoot>";
         $return .= "</table>";

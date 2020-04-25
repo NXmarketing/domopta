@@ -539,7 +539,8 @@ input:-webkit-autofill {
     max-width: 430px;
   }
 }
-@media screen and (max-width: 359px) {
+
+@media screen and (max-width: 479px) {
   .container_pop-small {
     max-width: 320px;
   }
@@ -7813,7 +7814,7 @@ yx-axis
   }
 }
 
-@media screen and (max-width: 359px) {
+@media screen and (max-width: 479px) {
   .cart_popup{
     margin-left: -160px;
   }

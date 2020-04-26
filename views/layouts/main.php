@@ -234,6 +234,8 @@ $this->registerJsFile('/js/lightslider.js',['depends' => \yii\web\JqueryAsset::c
                             <span class="help">
                                 <span class="help__text">Избранное</span>
                             </span>
+                            <div class="liked-header-counter">22</div>
+
                         </a>
                     </div>
 

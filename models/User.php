@@ -228,9 +228,7 @@ class User extends \dektrium\user\models\User
         if ($result) {
             $number = str_replace('+', '', $this->username);
             \Yii::$app->sms->send_sms($number, "Пароль для входа на сайт успешно изменен.\nНовый пароль для входа:\n" . $this->password . "\ndomopta.ru");
-            //			echo $this->password;
         }
-        //$result = (bool) $this->updateAttributes(['confirmed_at' => time()]);
         $this->trigger(self::AFTER_CONFIRM);
         return $result;
     }
@@ -242,6 +240,9 @@ class User extends \dektrium\user\models\User
         $this->confirmed_at = time();
         $result = (bool) $this->save();
         if ($result) {
+            Session::deleteAll(['user_id' => $this->id]);
+            $this->auth_key = \Yii::$app->security->generateRandomString();
+            $this->save();
             $number = str_replace('+', '', $this->username);
             \Yii::$app->sms->send_sms($number, "Спасибо за регистрацию!\nВаш пароль для входа на сайте:\n" . $this->password . "\ndomopta.ru");
         }
@@ -317,7 +318,7 @@ class User extends \dektrium\user\models\User
                 $return .= $cart->product->name;
                 $return .= "</td>";
                 $return .= "<td>";
-                $return .= $detail->color;
+                $return .= $detail->color == 'default' ? '' : $detail->color;
                 $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
                 $return .= $detail->amount;

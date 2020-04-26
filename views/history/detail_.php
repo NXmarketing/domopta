@@ -47,7 +47,7 @@
 									</tr>
 									<tr>
 										<td><?php
-											$str = $item->color;
+											$str = $item->color !='default' ? $item->color : '';
 											echo $str;
 											?></td>
 										<td><?php

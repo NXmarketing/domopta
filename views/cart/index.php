@@ -69,7 +69,10 @@ $total = \app\models\Cart::getAmount();
 	                                    $str = '';
 	                                    foreach ($item->details as $detail){
 		                                    if($detail->amount >0){
-		                                        if($item->product->hasColor($detail->color)){
+                                                if($detail->color == 'default'){
+                                                    $str .= '<span></span><br />';
+                                                }
+		                                        elseif($item->product->hasColor($detail->color)){
                                                     $str .= '<span>' . $detail->color . '</span><br />';
                                                 } else {
                                                     $str .= '<span class="cart_selled">' . $detail->color . '</span><br />';
@@ -139,8 +142,8 @@ $total = \app\models\Cart::getAmount();
                                         $str = '';
                                         foreach ($item->details as $detail){
 	                                        if($detail->amount >0){
-	                                            $fill_class = "";
-	                                            if(!$item->product->hasColor($detail->color)){
+                                                $fill_class = "";
+	                                            if($detail->color != 'default' && !$item->product->hasColor($detail->color)){
 	                                                $fill_class = "fill_red";
                                                 }
 		                                        $str .= Html::a('<svg class="svg cart-main-btn__svg cart-main-btn__svg_cross1 '.$fill_class.'">

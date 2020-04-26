@@ -30,10 +30,6 @@ class Session extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-<<<<<<< HEAD
         return 'session';
-=======
-        return 'sessions';
->>>>>>> 549040eca55e5d95ac627a5331e223960e32404a
     }
 }

@@ -17,11 +17,11 @@ class ForgotForm extends Model
 {
 
 	public $phone;
-	public $recaptcha;
+	public $recaptcha;//
 
 	public function rules() {
 		return [
-			['recaptcha', ReCaptchaValidator::className(), 'message' => 'Подтвердите, что вы не робот'],
+			//['recaptcha', ReCaptchaValidator::className(), 'message' => 'Подтвердите, что вы не робот'],
 			['phone', 'required', 'message' => 'Введите номер телефона'],
 			['phone', 'checkPhone'],
 
@@ -36,7 +36,8 @@ class ForgotForm extends Model
 
 	public function scenarios() {
 		return [
-			'step1' => ['phone', 'recaptcha'],
+			'step1' => ['phone'],
+			// 'step1' => ['phone', 'recaptcha'],
 		];
 	}
 

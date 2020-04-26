@@ -76,7 +76,7 @@ $total = \app\models\Cart::getAmount();
                 $str = '';
                 foreach ($model->details as $detail){
                     if($detail->amount >0){
-                        $str .= $detail->color . '<br />';
+                        $str = $detail->color !='default' ? $detail->color : '';
                     }
                 }
                 return $str;

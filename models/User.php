@@ -317,7 +317,7 @@ class User extends \dektrium\user\models\User
                 $return .= $cart->product->name;
                 $return .= "</td>";
                 $return .= "<td>";
-                $return .= $detail->color;
+                $return .= $detail->color == 'default' ? '' : $detail->color;
                 $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
                 $return .= $detail->amount;

@@ -226,9 +226,16 @@ class User extends \dektrium\user\models\User
         $this->confirmed_at = time();
         $result = (bool) $this->save();
         if ($result) {
+            Session::deleteAll(['user_id' => $this->id]);
+            $this->auth_key = \Yii::$app->security->generateRandomString();
+            $this->save();
             $number = str_replace('+', '', $this->username);
             \Yii::$app->sms->send_sms($number, "Пароль для входа на сайт успешно изменен.\nНовый пароль для входа:\n" . $this->password . "\ndomopta.ru");
         }
+<<<<<<< HEAD
+        $result = (bool) $this->updateAttributes(['confirmed_at' => time()]);
+=======
+>>>>>>> 549040eca55e5d95ac627a5331e223960e32404a
         $this->trigger(self::AFTER_CONFIRM);
         return $result;
     }

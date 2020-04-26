@@ -785,14 +785,22 @@ input:-webkit-autofill {
     user-select: none;
 }
 
-.lSSlideOuter .lSPager.lSGallery li {
+.photos-tovar .lSSlideOuter .lSPager.lSGallery li {
     display: flex;
     align-items: center;
     overflow: hidden;
-    margin-top: 10%;
-    margin-bottom: 10%;
+    height: 131px !important;
+    margin-top: 5px;
+    /*margin-bottom: 10%;*/
     -webkit-transition: border-radius 0.12s linear 0s 0.35s linear 0s;
     transition: border-radius 0.12s linear 0s 0.35s linear 0s;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.photos-tovar .lSSlideOuter .lSPager.lSGallery li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lSSlideOuter .lSPager.lSGallery li.active,
@@ -800,12 +808,14 @@ input:-webkit-autofill {
     border-radius: 5px;
 }
 
-.lSSlideOuter .lSPager.lSGallery img {
+.photos-tovar .lSSlideOuter .lSPager.lSGallery img {
     display: block;
     height: auto;
     max-width: 96%;
     margin: auto;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);}
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
 
 .lSSlideOuter .lSPager.lSGallery:before,
 .lSSlideOuter .lSPager.lSGallery:after {
@@ -868,13 +878,16 @@ input:-webkit-autofill {
     padding-right: 0px !important;
 }
 
-.lSSlideOuter.vertical .lSGallery {
+.photos-tovar .lSSlideOuter.vertical .lSGallery {
     position: absolute !important;
     right: 0;
     top: 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
 }
 
-.lSSlideOuter.vertical .lightSlider > * {
+.photos-tovar .lSSlideOuter.vertical .lightSlider > * {
     width: 100% !important;
     max-width: none !important;
     display: flex;
@@ -884,18 +897,27 @@ input:-webkit-autofill {
 }
 
 /* vertical controlls */
-.lSSlideOuter.vertical .lSAction > a {
+.photos-tovar .lSSlideOuter.vertical .lSAction > a {
     left: 0;
     /*margin-left: -14px;*/
     margin-top: 0;
     transform: rotate(90deg)
 }
-.photos-tovar__item.lslide{
+
+.photos-tovar .photos-tovar__item.lslide {
     width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
 
+}
+
+.look-pop__tovar .photos-tovar .lSSlideOuter .lSPager.lSGallery li {
+    box-shadow: none;
+}
+
+.look-pop__tovar .photos-tovar .lSSlideOuter.vertical .lSGallery {
+    justify-content: center
 }
 
 .lSSlideOuter.vertical .lSAction > .lSNext {
@@ -1822,7 +1844,7 @@ input:-webkit-autofill {
     border: 1px solid #24A0C7;
     padding: 8px 30px;
     padding-top: 11px;
-    background:#24A0C8;
+    background: #24A0C8;
     cursor: pointer;
     color: #fff;
     -webkit-border-radius: 2px;
@@ -2175,7 +2197,7 @@ input:-webkit-autofill {
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border: 1px solid #000;
-    border-radius: 5px ;
+    border-radius: 5px;
     font-size: 12px;
     line-height: normal;
     /*text-transform: uppercase;*/
@@ -2186,9 +2208,11 @@ input:-webkit-autofill {
     -webkit-transition: all 400ms ease;
     transition: all 400ms ease;
 }
+
 .product__link:hover {
     border: 1px solid #24A0C8;
 }
+
 .product__link:first-letter {
     text-transform: uppercase;;
 }
@@ -2716,17 +2740,22 @@ input:-webkit-autofill {
     font-size: 18px;
     padding-top: 5px;
 }
-.header__schedule-header{
+
+.header__schedule-header {
     padding-top: 10px;
 }
+
 .schedule-header-bottom {
     text-transform: uppercase;
 }
-.fotter-schedule-top{
+
+.fotter-schedule-top {
     padding-bottom: 5px;
 }
-.fotter-schedule-bottom{
+
+.fotter-schedule-bottom {
 }
+
 .reg-enter-header {
     -webkit-box-align: end;
     -ms-flex-align: end;
@@ -3742,7 +3771,7 @@ input:-webkit-autofill {
 
 .photos-tovar {
     position: relative;
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
 }
 
 @media screen and (max-width: 479px) {
@@ -3777,7 +3806,8 @@ input:-webkit-autofill {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 
 }
-.photos-tovar__img img{
+
+.photos-tovar__img img {
     width: 80%;
 }
 
@@ -3797,16 +3827,27 @@ input:-webkit-autofill {
     /*justify-content: center;*/
 }
 
-.photos-tovar__arrow {
-    position: absolute;
-    top: calc(50% - 40px);
+.tovar__arrow__wrapper {
+    /*position: relative;*/
+    height: 100%;
 }
 
-.photos-tovar__arrow_l {
+.photos-tovar .photos-tovar__arrow {
+    position: absolute;
+    left: 44px;
+    z-index: 10;
+    transform: rotate(90deg);
+    cursor: pointer;
+    /*top: calc(50% - 40px);*/
+}
+
+.photos-tovar .photos-tovar__arrow_l {
+    top: 0;
     /*left: -15px;*/
 }
 
-.photos-tovar__arrow_r {
+.photos-tovar  .photos-tovar__arrow_r {
+    bottom: 0;
     /*right: -15px;*/
 }
 

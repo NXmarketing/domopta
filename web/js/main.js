@@ -183,13 +183,22 @@ $(document).ready(function(){
         loop: true,
         slideMargin: 0,
         vertical:true,
-        vThumbWidth:80,
+        vThumbWidth:100,
         thumbItem:3,
-        prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
-        nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
+        // prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
+        // nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
         onAfterSlide: function (el) {
             $('.current-photo').text($(el).find('.active').data('i'));
         },
+
+    });
+
+    $(".tovar__arrow__wrapperP .photos-tovar__arrow_l").on("click", function() {
+        sliderP.goToPrevSlide();
+    });
+
+    $(".tovar__arrow__wrapperP .photos-tovar__arrow_r").on("click", function() {
+        sliderP.goToNextSlide();
     });
     var picP = document.querySelector('.pic_p');
     var picPP = document.querySelector('.pic_pp');
@@ -496,13 +505,23 @@ if (window.innerWidth < 1200) {
                             item: 1,
                             loop: true,
                             slideMargin: 0,
-                            thumbItem: 4,
-                            prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
-                            nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
+                            vertical:true,
+                            vThumbWidth:80,
+                            thumbItem:3,
+                            // prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
+                            // nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
                             onAfterSlide: function (el) {
                                 $('.current-photo').text($(el).find('.active').data('i'));
                             },
                         });
+                        $(".tovar__arrow__wrapperPP .photos-tovar__arrow_l").on("click", function() {
+                            sliderPP.goToPrevSlide();
+                        });
+
+                        $(".tovar__arrow__wrapperPP .photos-tovar__arrow_r").on("click", function() {
+                            sliderPP.goToNextSlide();
+                        });
+
 //                        if (picPP) {
 //                            $('.pic_pp').magnifier({
 //                                magnify: 3, 
@@ -523,12 +542,21 @@ if (window.innerWidth < 1200) {
                     item: 1,
                     loop: true,
                     slideMargin: 0,
-                    thumbItem: 4,
-                    prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
-                    nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
+                    vertical:true,
+                    vThumbWidth:75,
+                    thumbItem:3,
+                    // prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
+                    // nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
                     onAfterSlide: function (el) {
                         $('.current-photo').text($(el).find('.active').data('i'));
                     },
+                });
+                $(".tovar__arrow__wrapperPP .photos-tovar__arrow_l").on("click", function() {
+                    sliderPP.goToPrevSlide();
+                });
+
+                $(".tovar__arrow__wrapperPP .photos-tovar__arrow_r").on("click", function() {
+                    sliderPP.goToNextSlide();
                 });
 //                if (picPP) {
 //                    $('.pic_pp').magnifier({
@@ -544,6 +572,7 @@ if (window.innerWidth < 1200) {
         }
         });
     });
+
     $('body').on('submit', '#login-form', function (e) {
         e.preventDefault();
         var form = $(this);

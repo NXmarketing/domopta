@@ -39,10 +39,33 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
     <div class="look-pop-inner">
         <div class="tovar look-pop__tovar">
             <div class="tovar-left">
+                <style>
+                    .lSSlideOuter.vertical {
+                        padding-left: 55px;
+                        padding-right: 0 !important;
+                    }
+
+                    .lSSlideOuter.vertical .lSGallery {
+                        left: 0;
+                    }
+                </style>
                 <div class="photos-tovar tovar__photos-tovar">
                     <div class="display display_pp"></div>
+                    <?php $pictures = $model->pictures; ?>
+                    <?php if (count($pictures) > 2): ?>
+
+                        <div class="tovar__arrow__wrapper tovar__arrow__wrapperPP">
+                            <div class="photos-tovar__arrow photos-tovar__arrow_l"><span
+                                        class="photos-tovar__link photos-tovar__icon"><svg
+                                            class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use
+                                                xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>
+                            <div class="photos-tovar__arrow photos-tovar__arrow_r"><span
+                                        class="photos-tovar__link photos-tovar__icon"><svg
+                                            class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use
+                                                xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>
+                        </div>
+                    <?php endif; ?>
                     <ul class="photos-tovar__list_pp">
-                        <?php $pictures = $model->pictures; ?>
                         <?php if (!empty($pictures)) : ?>
                             <?php
                             $i = 0;

@@ -148,7 +148,7 @@ $types = [
             <td style="padding: 3px;"><?php echo $detail->name ?></td>
             <td align="center"><?php echo $detail->product->ooo?'О':'Т' ?></td>
             <td><b style="font-size: 13px;"><?php echo $detail->product->article ?></b></td>
-            <td><?php echo $detail->color ?></td>
+            <td><?php echo $detail->color == 'default' ? '' : $detail->color; ?></td>
             <td><?php echo $detail->memo ?></td>
             <td align="center"><?php echo $detail->product->pack_quantity?$detail->product->pack_quantity:1 ?></td>
             <?php if(Yii::$app->user->identity->profile->type == 2): ?>

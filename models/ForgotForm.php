@@ -17,7 +17,7 @@ class ForgotForm extends Model
 {
 
 	public $phone;
-	public $recaptcha;
+	public $recaptcha;//
 
 	public function rules() {
 		return [

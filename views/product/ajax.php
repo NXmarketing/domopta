@@ -52,17 +52,13 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                 <div class="photos-tovar tovar__photos-tovar">
                     <div class="display display_pp"></div>
                     <?php $pictures = $model->pictures; ?>
-                    <?php if (count($pictures) > 2): ?>
+                    <?php if (count($pictures) > 3) : ?>
 
                         <div class="tovar__arrow__wrapper tovar__arrow__wrapperPP">
-                            <div class="photos-tovar__arrow photos-tovar__arrow_l"><span
-                                        class="photos-tovar__link photos-tovar__icon"><svg
-                                            class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use
-                                                xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>
-                            <div class="photos-tovar__arrow photos-tovar__arrow_r"><span
-                                        class="photos-tovar__link photos-tovar__icon"><svg
-                                            class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use
-                                                xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>
+                            <div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left">
+                                        <use xlink:href="/img/sprite-sheet.svg#arrow2-left" /></svg></span></div>
+                            <div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right">
+                                        <use xlink:href="/img/sprite-sheet.svg#arrow2-right" /></svg></span></div>
                         </div>
                     <?php endif; ?>
                     <ul class="photos-tovar__list_pp">
@@ -249,12 +245,9 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                 <div class="form-tovar tovar__form-tovar">
                     <?php if ($model->flag == 1) : ?>
                         <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsActive()) : ?>
-                            <?php
-                            $yap = trim($model->color) == '';
-                            var_dump($yap);
-                            if ($yap) { ?>
-                                <?php $form = ActiveForm::begin(['id' => 'product-form', 'action' => ['/product/add']]) ?>
-                                <?php echo $form->field($form_model, 'product_id')->label(false)->hiddenInput(['value' => $model->id]); ?>
+                            <?php $form = ActiveForm::begin(['id' => 'product-form', 'action' => ['/product/add']]) ?>
+                            <?php echo $form->field($form_model, 'product_id')->label(false)->hiddenInput(['value' => $model->id]); ?>
+                            <?php if (trim($model->color) == '') : ?>
                                 <div class="form-tovar__colors">
                                     <ul class="form-tovar__list">
                                         <li class="form-tovar__item">
@@ -265,9 +258,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                                         </li>
                                     </ul>
                                 </div>
-                            <? } 
-                            var_dump($yap);
-                            if (!$yap)  { ?>
+                            <?php else : ?>
                                 <?php $colors = explode(',', $model->color); ?>
                                 <div class="h2colors">Цвета для заказа:</div>
                                 <div class="form-tovar__colors">
@@ -290,8 +281,8 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                                         } ?>
                                     </ul>
                                 </div>
-                            <?php } 
-                            var_dump($yap);?>
+                            <?php endif; ?>
+                            <?php ActiveForm::end() ?>
                         <?php endif; ?>
                     <?php else : ?>
                         <?php echo Yii::$app->settings->get('Settings.notify_product_absend') ?>

@@ -174,7 +174,7 @@ class SiteController extends Controller
 	    return $this->renderAjax('forgot', ['model' => $model]);
     }
 
-	public function actionForgotvalidation(){
+	public function actionForgotvalidation(){ 
 		$model = new ForgotForm();
 		$model->scenario = 'step1';
 		$model->load(\Yii::$app->request->post());

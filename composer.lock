@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea95ba4a460a802759fcff559d31adf8",
+    "content-hash": "66e2711882308067e2e1fce649b0f638",
     "packages": [
         {
             "name": "2amigos/yii2-tinymce-widget",
@@ -89,7 +89,7 @@
             "version": "v3.4.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:twbs/bootstrap.git",
+                "url": "https://github.com/twbs/bootstrap.git",
                 "reference": "68b0d231a13201eb14acd3dc84e51543d16e5f7e"
             },
             "dist": {
@@ -1096,12 +1096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "3753f7aa83138a8714030a79619c0ebefc7fb611"
+                "reference": "8cf661b620279503f2ca64447de04a34624a7d5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/3753f7aa83138a8714030a79619c0ebefc7fb611",
-                "reference": "3753f7aa83138a8714030a79619c0ebefc7fb611",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/8cf661b620279503f2ca64447de04a34624a7d5a",
+                "reference": "8cf661b620279503f2ca64447de04a34624a7d5a",
                 "shasum": ""
             },
             "require": {
@@ -1150,7 +1150,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2020-04-19T11:32:41+00:00"
+            "time": "2020-04-23T17:41:14+00:00"
         },
         {
             "name": "imagine/imagine",
@@ -2489,12 +2489,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "37b0976c78b94856543260ce09b460a7bc852747"
+                "reference": "41d115ace412a5a006a92f29a51c7d863e28482b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/37b0976c78b94856543260ce09b460a7bc852747",
-                "reference": "37b0976c78b94856543260ce09b460a7bc852747",
+                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/41d115ace412a5a006a92f29a51c7d863e28482b",
+                "reference": "41d115ace412a5a006a92f29a51c7d863e28482b",
                 "shasum": ""
             },
             "require": {
@@ -2536,7 +2536,21 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-02-27T09:26:54+00:00"
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-04-13T15:22:19+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
@@ -2544,12 +2558,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "8854dc880784d2ae32908b75824754339b5c0555"
+                "reference": "cb64c503a89a49bcf6334a57639e244e488b0fe9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/8854dc880784d2ae32908b75824754339b5c0555",
-                "reference": "8854dc880784d2ae32908b75824754339b5c0555",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/cb64c503a89a49bcf6334a57639e244e488b0fe9",
+                "reference": "cb64c503a89a49bcf6334a57639e244e488b0fe9",
                 "shasum": ""
             },
             "require": {
@@ -2612,7 +2626,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-03-03T16:59:03+00:00"
+            "time": "2020-04-23T15:16:55+00:00"
         },
         {
             "name": "symfony/translation",
@@ -2755,12 +2769,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "29bd1c22d35ad8a27982fddbe11a84a124c24b40"
+                "reference": "a9e4928aac63b18db3bc670661f8661133c3c205"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/29bd1c22d35ad8a27982fddbe11a84a124c24b40",
-                "reference": "29bd1c22d35ad8a27982fddbe11a84a124c24b40",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/a9e4928aac63b18db3bc670661f8661133c3c205",
+                "reference": "a9e4928aac63b18db3bc670661f8661133c3c205",
                 "shasum": ""
             },
             "type": "component",
@@ -2793,7 +2807,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2020-03-25T02:45:35+00:00"
+            "time": "2020-04-23T02:47:51+00:00"
         },
         {
             "name": "voku/portable-ascii",
@@ -3129,12 +3143,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-httpclient.git",
-                "reference": "d429d70a60171ee726bcd0aef0127ef74ef0f256"
+                "reference": "b38a0e917a43b65933cd2323345c4e326fef00c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/d429d70a60171ee726bcd0aef0127ef74ef0f256",
-                "reference": "d429d70a60171ee726bcd0aef0127ef74ef0f256",
+                "url": "https://api.github.com/repos/yiisoft/yii2-httpclient/zipball/b38a0e917a43b65933cd2323345c4e326fef00c7",
+                "reference": "b38a0e917a43b65933cd2323345c4e326fef00c7",
                 "shasum": ""
             },
             "require": {
@@ -3171,7 +3185,21 @@
                 "httpclient",
                 "yii2"
             ],
-            "time": "2019-12-06T16:12:41+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/yiisoft",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/yiisoft",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/yiisoft/yii2-httpclient",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-04-23T10:06:40+00:00"
         },
         {
             "name": "yiisoft/yii2-imagine",
@@ -4725,12 +4753,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "1cc2dcf1b2777312c7266c19a68805cf4801f03e"
+                "reference": "ac702d70957611fc03763608ee620ec1d0f0fb59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1cc2dcf1b2777312c7266c19a68805cf4801f03e",
-                "reference": "1cc2dcf1b2777312c7266c19a68805cf4801f03e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ac702d70957611fc03763608ee620ec1d0f0fb59",
+                "reference": "ac702d70957611fc03763608ee620ec1d0f0fb59",
                 "shasum": ""
             },
             "require": {
@@ -4800,7 +4828,17 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2020-04-17T05:49:06+00:00"
+            "funding": [
+                {
+                    "url": "https://phpunit.de/donate.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/sebastianbergmann",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-04-24T05:02:47+00:00"
         },
         {
             "name": "psr/event-dispatcher",
@@ -5793,12 +5831,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "d364824a4808d47d7a0a01b61e2ef54703a267d2"
+                "reference": "bc8f774a88ff35f65cb91bc38ef3e31d27d24eb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d364824a4808d47d7a0a01b61e2ef54703a267d2",
-                "reference": "d364824a4808d47d7a0a01b61e2ef54703a267d2",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/bc8f774a88ff35f65cb91bc38ef3e31d27d24eb5",
+                "reference": "bc8f774a88ff35f65cb91bc38ef3e31d27d24eb5",
                 "shasum": ""
             },
             "require": {
@@ -5871,7 +5909,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-05T06:49:38+00:00"
+            "time": "2020-04-23T21:57:44+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -6311,12 +6349,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "3ef9c6c53b02306046a3b34199da30fc3e4a10f3"
+                "reference": "3464695c25efd6d02d87320883dc4b402cb81dfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/3ef9c6c53b02306046a3b34199da30fc3e4a10f3",
-                "reference": "3ef9c6c53b02306046a3b34199da30fc3e4a10f3",
+                "url": "https://api.github.com/repos/symfony/string/zipball/3464695c25efd6d02d87320883dc4b402cb81dfe",
+                "reference": "3464695c25efd6d02d87320883dc4b402cb81dfe",
                 "shasum": ""
             },
             "require": {
@@ -6387,7 +6425,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-03-16T17:33:00+00:00"
+            "time": "2020-04-21T19:55:25+00:00"
         },
         {
             "name": "symfony/yaml",

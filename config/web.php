@@ -182,7 +182,7 @@ $config = [
             ],
             'urlRules' => [],
             'mailer' => [
-                'class' => 'app\components\Mailer'
+                'class' => 'yii\swiftmailer\Mailer'
             ],
         ],
         'admin' => [

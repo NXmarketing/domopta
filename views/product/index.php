@@ -110,7 +110,7 @@ $next = $category->getNextproduct($model->id);
                             }
                         </style>
                         <?php $pictures = $model->pictures; ?>
-                        <?php if (count($pictures) > 2): ?>
+                        <?php if (count($pictures) > 3): ?>
 
                         <div class="tovar__arrow__wrapper tovar__arrow__wrapperP">
                             <div class="photos-tovar__arrow photos-tovar__arrow_l"><span

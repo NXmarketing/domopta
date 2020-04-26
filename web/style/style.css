@@ -916,8 +916,8 @@ input:-webkit-autofill {
     box-shadow: none;
 }
 
-.look-pop__tovar .photos-tovar .lSSlideOuter.vertical .lSGallery {
-    justify-content: center
+.look-pop__tovar .photos-tovar .photos-tovar__arrow {
+    left: 30px;
 }
 
 .lSSlideOuter.vertical .lSAction > .lSNext {

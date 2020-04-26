@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                 <div class="photos-tovar tovar__photos-tovar">
                     <div class="display display_pp"></div>
                     <?php $pictures = $model->pictures; ?>
-                    <?php if (count($pictures) > 2): ?>
+                    <?php if (count($pictures) > 3): ?>
 
                         <div class="tovar__arrow__wrapper tovar__arrow__wrapperPP">
                             <div class="photos-tovar__arrow photos-tovar__arrow_l"><span

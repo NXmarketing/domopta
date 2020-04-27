@@ -184,9 +184,34 @@ $(document).ready(function(){
         slideMargin: 0,
         vertical:true,
         vThumbWidth:100,
-        thumbItem:3,
+        thumbItem:3,controls:false,
         // prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
         // nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
+        responsive : [
+            {
+                breakpoint:994,
+                settings: {
+                    gallery: true,
+                    item: 1,
+                    loop: true,
+                    slideMargin: 0,
+                    vertical:true,
+                    vThumbWidth:80,
+                    thumbItem:3,
+                    controls:false,
+                    verticalHeight:420,
+
+                }
+            },
+            {
+                breakpoint:480,
+                settings: {
+                    vThumbWidth:60,
+                    verticalHeight:350,
+
+                }
+            }
+        ],
         onAfterSlide: function (el) {
             $('.current-photo').text($(el).find('.active').data('i'));
         },
@@ -508,6 +533,7 @@ if (window.innerWidth < 1200) {
                             vertical:true,
                             vThumbWidth:80,
                             thumbItem:3,
+                            controls:false,
                             // prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
                             // nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
                             onAfterSlide: function (el) {
@@ -544,7 +570,7 @@ if (window.innerWidth < 1200) {
                     slideMargin: 0,
                     vertical:true,
                     vThumbWidth:75,
-                    thumbItem:3,
+                    thumbItem:3,controls:false,
                     // prevHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>',
                     // nextHtml: '<div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>',
                     onAfterSlide: function (el) {

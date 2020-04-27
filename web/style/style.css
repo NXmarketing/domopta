@@ -959,6 +959,22 @@ input:-webkit-autofill {
     float: right !important;
 }
 
+.photos-tovar .lSSlideOuter.vertical .lightSlider.tovar__one > * {
+    justify-content: flex-start;
+    padding-left: 3px;
+}
+
+
+.photos-tovar.tovar__no_arrow .lSSlideOuter.vertical .lSGallery {
+    padding-top: 4px;
+    justify-content: space-between;
+    padding-bottom: 9px;;
+}
+
+.photos-tovar.tovar__no_arrow .lSSlideOuter .lSPager.lSGallery:before, .lSSlideOuter .lSPager.lSGallery:after {
+    display: none;
+}
+
 /* Rtl */
 @-webkit-keyframes rightEnd {
     0% {
@@ -3846,7 +3862,7 @@ input:-webkit-autofill {
     /*left: -15px;*/
 }
 
-.photos-tovar  .photos-tovar__arrow_r {
+.photos-tovar .photos-tovar__arrow_r {
     bottom: 0;
     /*right: -15px;*/
 }
@@ -3858,6 +3874,72 @@ input:-webkit-autofill {
 
 .form-tovar {
     padding: 15px 0;
+}
+
+@media (max-width: 994px) {
+    .photos-tovar .lSSlideOuter .lSPager.lSGallery li {
+        box-shadow: none;
+    }
+
+    .photos-tovar .photos-tovar__arrow {
+        left: 30px;
+    }
+
+    .photos-tovar .lSSlideOuter.vertical .lSGallery {
+    }
+
+    .lSSlideOuter.vertical {
+        margin-bottom: 25px;
+        margin-top: 25px;
+    }
+
+    .photos-tovar .photos-tovar__arrow_l {
+        top: -20px;
+    }
+
+    .photos-tovar .photos-tovar__arrow_r {
+        bottom: -20px;
+    }
+}
+
+@media (max-width: 769px) {
+    .photos-tovar .lSSlideOuter.vertical .lightSlider > * {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .photos-tovar__img {
+        width: 90%;
+    }
+
+    .photos-tovar .lSSlideOuter.vertical .lSGallery {
+    }
+
+    .lSSlideOuter.vertical {
+        margin-bottom: 25px;
+        margin-top: 25px;
+    }
+
+    .photos-tovar .photos-tovar__arrow_l {
+        top: -20px;
+    }
+
+    .photos-tovar .photos-tovar__arrow_r {
+        bottom: -20px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .photos-tovar .photos-tovar__arrow_l {
+        left: 22px;
+        top: -10px;
+    }
+
+    .photos-tovar .photos-tovar__arrow_r {
+        left: 22px;
+        bottom: -10px;
+    }
 }
 
 .form-tovar__list {
@@ -5063,7 +5145,7 @@ input:-webkit-autofill {
 }
 
 .reg-pop__btn {
-    border: 1px solid #000;
+    border: 1px solid #24a0c7;
     background: #24a0c7;
     color: #fff;
     padding: 10px 80px;

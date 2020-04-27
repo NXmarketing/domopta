@@ -193,7 +193,7 @@ $total = \app\models\Cart::getAmount();
                         <a href="/cabinet" class="user-btns__link">Мой профиль</a>
                     </li>
                     <li class="user-btns__item">
-                        <a href="/history" class="user-btns__link">История покупок</a>
+                        <a href="/history" class="user-btns__link">История заказов</a>
                     </li>
                     <li class="user-btns__item">
                         <a href="/favorites" class="user-btns__link">Избранное</a>

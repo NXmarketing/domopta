@@ -52,16 +52,20 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                 <div class="photos-tovar tovar__photos-tovar">
                     <div class="display display_pp"></div>
                     <?php $pictures = $model->pictures; ?>
-                    <?php if (count($pictures) > 3) : ?>
+                    <?php if (count($pictures) > 3): ?>
 
                         <div class="tovar__arrow__wrapper tovar__arrow__wrapperPP">
-                            <div class="photos-tovar__arrow photos-tovar__arrow_l"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-left">
-                                        <use xlink:href="/img/sprite-sheet.svg#arrow2-left" /></svg></span></div>
-                            <div class="photos-tovar__arrow photos-tovar__arrow_r"><span class="photos-tovar__link photos-tovar__icon"><svg class="svg photos-tovar__svg photos-tovar__svg_arrow2-right">
-                                        <use xlink:href="/img/sprite-sheet.svg#arrow2-right" /></svg></span></div>
+                            <div class="photos-tovar__arrow photos-tovar__arrow_l"><span
+                                        class="photos-tovar__link photos-tovar__icon"><svg
+                                            class="svg photos-tovar__svg photos-tovar__svg_arrow2-left"><use
+                                                xlink:href="/img/sprite-sheet.svg#arrow2-left"/></svg></span></div>
+                            <div class="photos-tovar__arrow photos-tovar__arrow_r"><span
+                                        class="photos-tovar__link photos-tovar__icon"><svg
+                                            class="svg photos-tovar__svg photos-tovar__svg_arrow2-right"><use
+                                                xlink:href="/img/sprite-sheet.svg#arrow2-right"/></svg></span></div>
                         </div>
                     <?php endif; ?>
-                    <ul class="photos-tovar__list_pp">
+                    <ul class="photos-tovar__list_pp <?php if (count($pictures) < 1) echo 'tovar__one' ?>">
                         <?php if (!empty($pictures)) : ?>
                             <?php
                             $i = 0;
@@ -244,45 +248,48 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
 
                 <div class="form-tovar tovar__form-tovar">
                     <?php if ($model->flag == 1) : ?>
-                        <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsActive()) : ?>
-                            <?php $form = ActiveForm::begin(['id' => 'product-form', 'action' => ['/product/add']]) ?>
-                            <?php echo $form->field($form_model, 'product_id')->label(false)->hiddenInput(['value' => $model->id]); ?>
-                            <?php if (trim($model->color) == '') : ?>
-                                <div class="form-tovar__colors">
-                                    <ul class="form-tovar__list">
-                                        <li class="form-tovar__item">
-                                            <label class="form-tovar__label">
-                                                <div class="form-tovar__title">Кол-во:</div>
-                                                <?php echo Html::activeInput('number', $form_model, 'colors[default]', ['class' => 'form-tovar__input input-color', 'min' => 0, 'value' => 1]); ?>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            <?php else : ?>
+                        <?php if (trim($model->color) != '') : ?>
+                            <?php if (!Yii::$app->user->isGuest && Yii::$app->user->identity->getIsActive()) : ?>
+                                <?php $form = ActiveForm::begin(['id' => 'product-form', 'action' => ['/product/add']]) ?>
+                                <?php echo $form->field($form_model, 'product_id')->label(false)->hiddenInput(['value' => $model->id]); ?>
                                 <?php $colors = explode(',', $model->color); ?>
                                 <div class="h2colors">Цвета для заказа:</div>
                                 <div class="form-tovar__colors">
                                     <ul class="form-tovar__list">
                                         <?php
                                         $i = 0;
-                                        foreach ($colors as $color) { ?>
+                                        foreach ($colors as $color) : ?>
                                             <li class="form-tovar__item">
                                                 <label class="form-tovar__label">
                                                     <div class="form-tovar__title"><?php echo $color ?></div>
                                                     <?php echo Html::activeInput('number', $form_model, 'colors[' . $color . ']', ['class' => 'form-tovar__input input-color', 'min' => 0]) ?>
                                                 </label>
                                             </li>
-                                        <?php
+                                            <?php
                                             $i++;
-                                            if ($i > 20) {
+                                            if ($i > 20) :
                                                 $i = 0;
-                                                echo "</ul><ul class=\"form-tovar__list col-2\">";
-                                            }
-                                        } ?>
+                                            ?>
+                                    </ul>
+                                    <ul class="form-tovar__list col-2">
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
                                     </ul>
                                 </div>
+                                <div class="form-tovar-btn">
+                                    <?php echo Html::submitButton('
+                                <span class="form-tovar__text">Добавить в корзину</span>
+                                <span class="form-tovar-btn__icon">
+                                    <svg class="form-tovar-btn__svg form-tovar-btn__svg_basket1">
+                                        <use xlink:href="/img/sprite-sheet.svg#basket1"/>
+                                    </svg>
+                                    <svg class="form-tovar-btn__svg form-tovar-btn__svg_basket2">
+                                        <use xlink:href="/img/sprite-sheet.svg#basket2"/>
+                                    </svg>
+                                </span>', ['class' => 'form-tovar-btn__link']) ?>
+                                </div>
+                                <?php ActiveForm::end() ?>
                             <?php endif; ?>
-                            <?php ActiveForm::end() ?>
                         <?php endif; ?>
                     <?php else : ?>
                         <?php echo Yii::$app->settings->get('Settings.notify_product_absend') ?>

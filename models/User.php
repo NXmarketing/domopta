@@ -36,7 +36,7 @@ class User extends \dektrium\user\models\User
         $scenarios['create'][]   = 'is_active';
         $scenarios['update'][]   = 'is_active';
         $scenarios['register'][] = 'is_active';
-        $scenarios['cabinet'] = ['password', 'password_repeat', 'password_hash', 'email'];
+        $scenarios['cabinet'] = ['password', 'password_hash', 'email'];
         return $scenarios;
     }
 
@@ -48,6 +48,7 @@ class User extends \dektrium\user\models\User
         $rules[] = ['role', 'default', 'value' => 'user'];
         $rules[] = ['not_delete', 'integer'];
         $rules[] = ['password', 'string', 'min' => 6];
+        $rules[] = ['password_repeat', 'string', 'min' => 6];
         $rules[] = ['flags', 'safe'];
         $rules[] = ['email', 'email', 'skipOnEmpty' => true];
         $rules[] = ['password_repeat', 'compare', 'compareAttribute' => 'password'];
@@ -226,9 +227,6 @@ class User extends \dektrium\user\models\User
         $this->confirmed_at = time();
         $result = (bool) $this->save();
         if ($result) {
-            Session::deleteAll(['user_id' => $this->id]);
-            $this->auth_key = \Yii::$app->security->generateRandomString();
-            $this->save();
             $number = str_replace('+', '', $this->username);
             \Yii::$app->sms->send_sms($number, "Пароль для входа на сайт успешно изменен.\nНовый пароль для входа:\n" . $this->password . "\ndomopta.ru");
         }
@@ -243,9 +241,6 @@ class User extends \dektrium\user\models\User
         $this->confirmed_at = time();
         $result = (bool) $this->save();
         if ($result) {
-            Session::deleteAll(['user_id' => $this->id]);
-            $this->auth_key = \Yii::$app->security->generateRandomString();
-            $this->save();
             $number = str_replace('+', '', $this->username);
             \Yii::$app->sms->send_sms($number, "Спасибо за регистрацию!\nВаш пароль для входа на сайте:\n" . $this->password . "\ndomopta.ru");
         }
@@ -269,6 +264,10 @@ class User extends \dektrium\user\models\User
         parent::beforeSave($insert);
         if (!$insert) {
             $this->username = $this->getOldAttribute('username');
+            if ($this->getOldAttribute('password_hash') != $this->password_hash) {
+                Session::deleteAll(['user_id' => $this->id]);
+                $this->auth_key = \Yii::$app->security->generateRandomString();
+            }
         }
         return true;
     }
@@ -306,13 +305,13 @@ class User extends \dektrium\user\models\User
         $return .= "</tr>";
         $return .= "</thead>";
         $return .= "<tbody>";
-        $sum=0;
+        $sum = 0;
         $amm = 0;
         foreach ($carts as $cart) {
             foreach ($cart->details as $detail) {
                 $return .= "<tr>";
                 $return .= "<td>";
-                if(isset($cart->product->pictures[0])) $return .= Html::img($cart->product->pictures[0]->getUrl('thumb'));
+                if (isset($cart->product->pictures[0])) $return .= Html::img($cart->product->pictures[0]->getUrl('thumb'));
                 $return .= "</td>";
                 $return .= "<td>";
                 $return .= $cart->product->article_index;
@@ -348,9 +347,9 @@ class User extends \dektrium\user\models\User
         $return .= "</tbody>";
         $return .= "<tfoot>";
         $return .= "<td colspan=\"4\"><strong>Итого:</strong></td>";
-        $return .= "<td class=\"text-right text-center\"><strong>".$amm."</strong></td>";
+        $return .= "<td class=\"text-right text-center\"><strong>" . $amm . "</strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
-        $return .= "<td class=\"text-right text-nowrap\"><strong>".number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>'."</strong></td>";
+        $return .= "<td class=\"text-right text-nowrap\"><strong>" . number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>' . "</strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "</tfoot>";

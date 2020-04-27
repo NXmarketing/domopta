@@ -308,7 +308,7 @@ class CatalogController extends Controller
             }
             if($iteration) $slug .= '-' . $iteration;
             $iteration++;
-        } while (Category::findOne(['slug' => $slug]));
+        } while (Category::find()->where(['slug' => $slug])->andWhere(['!=', 'id', $id])->count());
         return $slug;
     }
 

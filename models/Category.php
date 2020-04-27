@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\Inflector;
 
 use mohorev\file\UploadImageBehavior;
 use Yii;
@@ -154,12 +155,12 @@ class Category extends \yii\db\ActiveRecord
     {
         $slug = $this->slug;
         if ($slug == '') {
-            $slug = '/category/' . Inflector::slug($this->name);
-        }
-        $iteration = 0;
-        while (News::findOne(['slug' => $slug])) {
-            $iteration++;
-            $slug = '/category/' . Inflector::slug($this->name) . '-' . $iteration;
+            $iteration = 0;
+            do {
+                $slug = '/category/' . Inflector::slug($this->name);
+                $slug .= $iteration ? '-' . $iteration : '';
+                $iteration++;
+            } while (self::find()->where(['slug' => $slug])->andWhere(['!=', 'id', $this->id])->count());
         }
         $this->slug = $slug;
     }

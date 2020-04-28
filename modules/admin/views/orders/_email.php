@@ -4,6 +4,7 @@
  * @var $order \app\models\Order
  */
 use yii\helpers\Url;
+use app\models\Products;
 $types = [
     '1' => 'Опт',
     '2' => 'Мелкий Опт',
@@ -96,13 +97,13 @@ $types = [
                     <tr>
                         <td style="border: 1px solid grey; padding-right: 10px;padding-left: 5px;"><?php echo $k; ?></td>
                         <td style="border: 1px solid grey; text-align: center;"><?php echo $v['amount']; ?></td>
-                        <td style="border: 1px solid grey; text-align: center;"><?php echo $v['sum']; ?> руб</td>
+                        <td style="border: 1px solid grey; text-align: center;"><?php echo Products::formatEmailPrice($v['sum'], true);?></td>
                     </tr>
                 <?php endforeach; ?>
                     <tr>
                         <td style="border: 1px solid grey; text-align: right; padding-right: 10px;">Общая сумма</td>
                         <td style="border: 1px solid grey"></td>
-                        <td style="border: 1px solid grey; text-align: center;"><?php echo $total ?> руб</td>
+                        <td style="border: 1px solid grey; text-align: center;"><?php echo Products::formatEmailPrice($total, true);?></td>
                     </tr>
             </table>
         </td>
@@ -152,19 +153,19 @@ $types = [
             <td><?php echo $detail->memo ?></td>
             <td align="center"><?php echo $detail->product->pack_quantity?$detail->product->pack_quantity:1 ?></td>
             <?php if(Yii::$app->user->identity->profile->type == 2): ?>
-                <td align="center"><?php echo ($detail->product->pack_price?(number_format($detail->product->pack_price2, 2, ',', '') . ' руб.'):'-') ?></td>
+                <td align="center"><?php echo Products::formatEmailPrice($detail->product->pack_price2);?></td>
             <?php else: ?>
-                 <td align="center"><?php echo ($detail->product->pack_price?(number_format($detail->product->pack_price, 2, ',', '') . ' руб.'):'-') ?></td>
+                 <td align="center"><?php echo Products::formatEmailPrice($detail->product->pack_price);?></td>
             <?php endif; ?>
-            <td align="center"><?php echo number_format($detail->price, 2, ',' , "") ?> руб.</td>
+            <td align="center"><?php echo Products::formatEmailPrice($detail->price);?></td>
             <td align="center" style="font-weight: bold;"><?php echo $detail->amount ?></td>
-            <td align="right" style="padding: 3px;"><?php echo number_format($detail->sum, 2, ',', '') ?> руб.</td>
+            <td align="right" style="padding: 3px;"><?php echo Products::formatEmailPrice($detail->sum);?></td>
         </tr>
     <?php endforeach; ?>
 </table>
 <br />
-<div align="right"><strong>Итого: </strong> <span style="letter-spacing: 1px; font-size: 15px;"> <?php echo number_format($total,2, ',', '') ?> руб.</span> </div>
+<div align="right"><strong>Итого: </strong> <span style="letter-spacing: 1px; font-size: 15px;"><?php echo Products::formatEmailPrice($total, true);?></span> </div>
 <div align="left">
-    <p>Игого, О: <?php echo $total_o ?> руб.</p>
-    <p>Игого, Т: <?php echo $total_t ?> руб.</p>
+    <p>Игого, О: <?php echo Products::formatEmailPrice($total_o, true);?></p>
+    <p>Игого, Т: <?php echo Products::formatEmailPrice($total_t, true);?></p>
 </div>

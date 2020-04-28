@@ -1,6 +1,7 @@
 <?php
 /* @var $this \yii\web\View */
 /* @var $orders \app\models\Order[] */
+use app\models\Products;
 ?>
 <div class="content content_flip main__content">
 	<div class="container container_fl-wr">
@@ -35,7 +36,7 @@
 
 								<td><?php echo Yii::$app->formatter->asDate($order->created_at, 'php:d.m.Y') ?></td>
 								<td class="td-left"><?php echo $order->getAmount() ?> <span class="sht">шт</span></td>
-								<td class="td-left"><?php echo number_format($order->getSum(), 2, ', <span class="kopeyki">', '') ?></span> <span class="rub">руб.</span></td>
+								<td class="td-left"><?php echo Products::formatPrice($order->getSum());?> </td>
 								<td>
 									<div class="btn-black history-main__btn-black">
 										<a href="/history/detail?id=<?php echo $order->id ?>" class="btn-black__link">Подробности</a>

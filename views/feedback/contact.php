@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
 								<?php echo Html::activeTextarea($model, 'body', ['class' => 'feedback__input feedback__input_text', 'placeholder' => 'СОOБЩЕНИЕ', 'required' => true])?>
 								<div class="active-input">СООБЩЕНИЕ</div>
 							</div>
-							<div class="feedback__row">
+							<div class="feedback__row min-height-row">
 								<label for="file-input-feed" class="file-input">
 									<span class='file-input__icon'>
 										<svg class="file-input__svg">

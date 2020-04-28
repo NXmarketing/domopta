@@ -249,6 +249,16 @@ class User extends \dektrium\user\models\User
         return $result;
     }
 
+    public function getFavoritesAmount()
+    {
+        $cnt = 0;
+        foreach($this->favorite as $favorite){
+            if($favorite->product) ++$cnt;
+        }
+
+        return $cnt;
+    }
+
     public function getFiles()
     {
         return $this->hasMany(UserFile::class, ['user_id' => 'id']);
@@ -326,10 +336,10 @@ class User extends \dektrium\user\models\User
                 $return .= $detail->amount;
                 $return .= "</td>";
                 $return .= "<td class=\"text-right text-nowrap\">";
-                $return .= number_format($detail->getPrice(), 2, ', <span class="kopeyki">', '') . '</span>';
+                $return .= Products::formatPrice($detail->getPrice());
                 $return .= "</td>";
                 $return .= "<td class=\"text-right text-nowrap\">";
-                $return .= number_format($detail->getSum(), 2, ', <span class="kopeyki">', '') . '</span>';
+                $return .= Products::formatPrice($detail->getSum());
                 $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
                 $return .= $cart->product->flag ? 'В&nbsp;наличии' : '<span style="color:red;">Продан</span>';
@@ -349,7 +359,7 @@ class User extends \dektrium\user\models\User
         $return .= "<td colspan=\"4\"><strong>Итого:</strong></td>";
         $return .= "<td class=\"text-right text-center\"><strong>" . $amm . "</strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
-        $return .= "<td class=\"text-right text-nowrap\"><strong>" . number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>' . "</strong></td>";
+        $return .= "<td class=\"text-right text-nowrap\"><strong>" . Products::formatPrice($sum) . "</strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "<td class=\"text-right text-nowrap\"><strong></strong></td>";
         $return .= "</tfoot>";

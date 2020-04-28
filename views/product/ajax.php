@@ -132,35 +132,19 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                             <div class="tag-tovar__holesale">
                                 <div class="tag-tovar-top">
                                     <span class="tag-tovar__title">оптовая цена</span>
-                                    <!-- <span class="icon-help">
-                                        <svg class="icon-help__svg">
-                                            <use xlink:href="/img/sprite-sheet.svg#qustion"/>
-                                        </svg>
-                                        <span class="help">
-                                            <span class="help__text">оптовая цена</span>
-                                        </span>
-                                    </span> -->
                                 </div>
                                 <div class="tag-tovar__bottom">
                                     <span class="tag-tovar__text">Цена за 1 шт:&nbsp;&nbsp;&nbsp;</span>
-                                    <span class="tag-tovar__price"><?php echo number_format($model->price, 2, ', <span class="kopeyki">', '') ?></span> &#8381;</span>
+                                    <span class="tag-tovar__price"><?php echo $model::formatPrice($model->price) ?></span> &#8381;</span>
                                 </div>
                             </div>
                             <div class="tag-tovar__retail">
                                 <div class="tag-tovar-top">
                                     <span class="tag-tovar__title">мелкооптовая цена</span>
-                                    <!-- <span class="icon-help">
-                                        <svg class="icon-help__svg">
-                                            <use xlink:href="/img/sprite-sheet.svg#qustion"/>
-                                        </svg>
-                                        <span class="help">
-                                            <span class="help__text">мелкооптовая цена</span>
-                                        </span>
-                                    </span> -->
                                 </div>
                                 <div class="tag-tovar-bottom">
                                     <span class="tag-tovar__text">Цена за 1 шт:&nbsp;&nbsp;&nbsp;</span>
-                                    <span class="tag-tovar__price"><?php echo number_format($model->price2 ? $model->price2 : $model->price, 2, ', <span class="kopeyki">', ''); ?></span> &#8381;</span>
+                                    <span class="tag-tovar__price"><?php echo $model::formatPrice($model->price2 ? $model->price2 : $model->price) ?></span> &#8381;</span>
                                 </div>
                             </div>
 
@@ -169,36 +153,20 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                                 <div class="tag-tovar__retail">
                                     <div class="tag-tovar-top">
                                         <span class="tag-tovar__title">мелкооптовая цена</span>
-                                        <!-- <span class="icon-help">
-                                            <svg class="icon-help__svg">
-                                                <use xlink:href="/img/sprite-sheet.svg#qustion"/>
-                                            </svg>
-                                            <span class="help">
-                                                <span class="help__text">мелкооптовая цена</span>
-                                            </span>
-                                        </span> -->
                                     </div>
                                     <div class="tag-tovar-bottom">
                                         <span class="tag-tovar__text">Цена за 1 шт:&nbsp;&nbsp;&nbsp;</span>
-                                        <span class="tag-tovar__price"><?php echo number_format($model->price2 ? $model->price2 : $model->price, 2, ', <span class="kopeyki">', ''); ?></span> &#8381;</span>
+                                        <span class="tag-tovar__price"><?php echo $model::formatPrice($model->price2 ? $model->price2 : $model->price); ?></span> &#8381;</span>
                                     </div>
                                 </div>
                             <?php elseif (Yii::$app->user->identity->profile->type == 1 || Yii::$app->user->identity->profile->type == 3) : ?>
                                 <div class="tag-tovar__holesale">
                                     <div class="tag-tovar-top">
                                         <span class="tag-tovar__title">оптовая цена</span>
-                                        <!-- <span class="icon-help">
-                                        <svg class="icon-help__svg">
-                                            <use xlink:href="/img/sprite-sheet.svg#qustion"/>
-                                        </svg>
-                                        <span class="help">
-                                            <span class="help__text">мелкооптовая цена</span>
-                                        </span>
-                                    </span> -->
                                     </div>
                                     <div class="tag-tovar__bottom">
                                         <span class="tag-tovar__text">Цена за 1 шт:&nbsp;&nbsp;&nbsp;</span>
-                                        <span class="tag-tovar__price"><?php echo number_format($model->price, 2, ', <span class="kopeyki">', '') ?></span> &#8381;</span>
+                                        <span class="tag-tovar__price"><?php echo $model::formatPrice($model->price) ?></span> &#8381;</span>
                                     </div>
                                 </div>
                             <?php endif; ?>
@@ -213,12 +181,12 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                                     <?php if (Yii::$app->user->identity->profile->type == 2) : ?>
                                         <li class="package-tovar__item">
                                             <span class="package-tovar__text">цена за уп: &nbsp;&nbsp;&nbsp;</span>
-                                            <span class="package-tovar__amount"><?php echo number_format($model->pack_price2, 2, ', <span class="kopeyki">', '') ?></span> &#8381;</span>
+                                            <span class="package-tovar__amount"><?php echo $model::formatPrice($model->pack_price2) ?></span> &#8381;</span>
                                         </li>
                                     <?php else : ?>
                                         <li class="package-tovar__item">
                                             <span class="package-tovar__text">цена за уп: &nbsp;&nbsp;&nbsp;</span>
-                                            <span class="package-tovar__amount"><?php echo number_format($model->pack_price, 2, ', <span class="kopeyki">', '') ?></span> &#8381;</span>
+                                            <span class="package-tovar__amount"><?php echo $model::formatPrice($model->pack_price) ?></span> &#8381;</span>
                                         </li>
                                     <?php endif; ?>
                                 </ul>

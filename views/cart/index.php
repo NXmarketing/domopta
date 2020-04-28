@@ -7,6 +7,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\grid\ActionColumn;
 use app\components\Breadcrumbs;
+use app\models\Products;
 
 $this->registerJsFile('/js/cart.js', ['depends' => \yii\web\JqueryAsset::className()]);
 $this->params['breadcrumbs'][] = 'Корзина';
@@ -86,9 +87,9 @@ $total = \app\models\Cart::getAmount();
 	                                    foreach ($item->details as $detail){
 		                                    if($detail->amount >0){
 		                                        if(Yii::$app->user->identity->profile->type == 1 || Yii::$app->user->identity->profile->type == 3) {
-			                                        $str .= number_format( $item->product->price, 2 , ', <span class="kopeyki">', '') . '</span><br />';
+			                                        $str .= Products::formatPrice($item->product->price) . '<br />';
 		                                        } elseif (Yii::$app->user->identity->profile->type == 2){
-			                                        $str .= number_format( $item->product->price2, 2 , ', <span class="kopeyki">', '') . '</span><br />';
+			                                        $str .= Products::formatPrice($item->product->price2) . '<br />';
                                                 }
 		                                    }
 	                                    }
@@ -131,7 +132,7 @@ $total = \app\models\Cart::getAmount();
                                         foreach ($item->details as $detail){
 	                                        if($detail->amount >0){
 		                                        $quantity = $item->product->pack_quantity?$item->product->pack_quantity:1;
-		                                        $str .= '<span class="detail-sum" data-id="'.$detail->id.'" >' . number_format($item->product->getUserPrice() * $quantity * $detail->amount, 2, ', ' , '') . '</span></span><br />';
+		                                        $str .= '<span class="detail-sum" data-id="'.$detail->id.'" >' . Products::formatPrice($item->product->getUserPrice() * $quantity * $detail->amount) . '</span><br />';
 	                                        }
                                         }
                                         echo $str;

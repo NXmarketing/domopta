@@ -1,6 +1,7 @@
 <?php
 /* @var $this \yii\web\View */
 /* @var $order \app\models\Order */
+use app\models\Products;
 ?>
 <?php
 $products = [];
@@ -59,7 +60,7 @@ foreach ($order->detiles as $item) {
 													echo $str;
 													?></td>
 												<td><?php
-													$str = number_format($item->price, 2, ', <span class="kopeyki">', '') . '</span>';
+													$str = Products::formatPrice($item->price);
 
 													echo $str;
 													?></td>
@@ -69,7 +70,7 @@ foreach ($order->detiles as $item) {
 
 												<td>
 													<?php
-													$str = number_format($item->sum, 2, ', <span class="kopeyki">', '') . '</span>';;
+													$str = Products::formatPrice($item->sum);
 
 													echo $str;
 													?>

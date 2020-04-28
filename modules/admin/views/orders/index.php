@@ -33,7 +33,7 @@ use yii\bootstrap\Modal;
             [
                     'label' => 'ФИО',
                     'value' => function($model){
-                        if($model->user){
+                        if($model->user && $model->user->profile){
                             return implode(' ', [
                                     $model->user->profile->lastname,
                                     $model->user->profile->name,
@@ -45,11 +45,10 @@ use yii\bootstrap\Modal;
             ],
             [
                     'attribute' => 'ooo',
+                    'value' => 'user.profile.organization_name',
                     'value' => function($model){
-                        if($model->user){
-                            return $model->user->profile->organization_name;
-                        }
-                    }
+                        return (string) $model->user->profile->organization_name;
+                    },
             ],
             [
                     'attribute' => 'sum',

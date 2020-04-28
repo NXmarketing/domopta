@@ -3,6 +3,7 @@
  * @var $this \yii\web\View
  * @var $order \app\models\Order
  */
+use app\models\Products;
 $types = [
     'ip' => 'ИП',
     'ooo' => 'ООО',
@@ -68,13 +69,13 @@ $types = [
                     <tr>
                         <td style="padding: 3px;"><?php echo $k; ?></td>
                         <td align="center"><?php echo $v['amount']; ?></td>
-                        <td align="right" style="padding: 3px;"><?php echo $v['sum']; ?> руб.</td>
+                        <td align="right" style="padding: 3px;"><?php echo Products::formatEmailPrice($v['sum'], true);?></td>
                     </tr>
                 <?php endforeach; ?>
                     <tr>
                         <td align="right" style="padding: 3px;">Общая сумма</td>
                         <td></td>
-                        <td align="right" style="padding: 3px;"><?php echo $total ?> руб.</td>
+                        <td align="right" style="padding: 3px;"><?php echo Products::formatEmailPrice($total, true);?></td>
                     </tr>
             </table>
         </td>
@@ -114,16 +115,16 @@ $types = [
             <td style="padding: 3px;"><?php echo $detail->color ?></td>
             <td><?php echo $detail->memo ?></td>
             <td align="center"><?php echo $detail->product->pack_quantity?$detail->product->pack_quantity:1 ?></td>
-            <td align="center"><?php echo (int)($detail->product->pack_price?$detail->product->pack_price:$detail->product->price) ?> руб.</td>
-            <td align="center"><?php echo (int)$detail->price ?> руб.</td>
+            <td align="center"><?php echo Products::formatEmailPrice((int)($detail->product->pack_price?$detail->product->pack_price:$detail->product->price), true);?></td>
+            <td align="center"><?php echo Products::formatEmailPrice((int)$detail->price, true);?></td>
             <td align="center"><?php echo $detail->amount ?></td>
-            <td align="right" style="padding: 3px;"><?php echo (int)$detail->sum ?> руб.</td>
+            <td align="right" style="padding: 3px;"><?php echo Products::formatEmailPrice((int)$detail->sum, true);?></td>
         </tr>
     <?php endforeach; ?>
 </table>
 <br />
 <table style="font-family: Arial; width: 100%;">
     <tr>
-        <td align="right" style="font-size: 18px;"><strong>Итого: </strong><?php echo $total ?> руб.</td>
+        <td align="right" style="font-size: 18px;"><strong>Итого: </strong><?php echo Products::formatEmailPrice($total, true);?></td>
     </tr>
 </table>

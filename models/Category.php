@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use yii\helpers\Inflector;
 
 use mohorev\file\UploadImageBehavior;
@@ -103,6 +104,18 @@ class Category extends \yii\db\ActiveRecord
     public function getParent()
     {
         return $this->hasOne(Category::className(), ['id' => 'parent_id']);
+    }
+
+    public function getParents()
+    {
+        $parents = [];
+        if ($this->parent_id) {
+            do {
+                $parent = Category::findOne(['id' => $this->parent_id]);
+                $parents[] = $parent;
+            } while ($parent->parent_id);
+        }
+        return $parents;
     }
 
     public function getProducts()

@@ -2154,6 +2154,9 @@ input:-webkit-autofill {
 .product__code {
     padding-bottom: 5px;
     font-size: 18px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .product__holesale,
@@ -2980,14 +2983,23 @@ input:-webkit-autofill {
     background: #fff;
     border-radius: 50%;
     font-weight: 500;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1;
     color: #08222A;
     position: absolute;
     right: -7px;
     top: -20%;
 }
+.liked-header-counter.lhcsf{
+    font-size: 10px;
+}
 
+.t-sold{
+    color:#C82424;
+}
+.t-stock{
+
+}
 .liked-header__btn:hover .liked-header__svg_heart2 {
     opacity: 1;
 }
@@ -4538,6 +4550,10 @@ input:-webkit-autofill {
     height: 50px;
     margin-bottom: 5px;
 }
+.min-height-row.feedback__row {
+    height: auto;
+    min-height: 50px;
+}
 
 .feedback__row_btn {
     min-height: 120px;
@@ -4575,10 +4591,21 @@ input:-webkit-autofill {
 .feedback__input::-ms-input-placeholder {
     color: #000;
 }
+label.file-input{
+    position: relative;
+    max-width: 100%;
+}
 
 .feedback__input-file {
     padding: 10px 0;
-    display: none;
+    /* display: none; */
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
 }
 
 .feedback__input_text {
@@ -6181,6 +6208,7 @@ input:-webkit-autofill {
     text-transform: uppercase;
     font-size: 12px;
     cursor: pointer;
+    line-height: 1.3;
 }
 
 .file-input__icon {

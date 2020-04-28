@@ -18,6 +18,7 @@ use yii\helpers\Json;
 class CategoryController extends Controller
 {
 
+
     public function actionIndex($id){
         $category = $this->getCategory($id);
         $searchModel = new ProductsSearch();

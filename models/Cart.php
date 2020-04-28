@@ -85,7 +85,7 @@ class Cart extends \yii\db\ActiveRecord
             }
         }
         return [
-            'sum' => number_format($sum, 2, ', <span class="kopeyki">', '') . '</span>',
+            'sum' => Products::formatPrice($sum),
             'amount' => $amount
         ];
     }

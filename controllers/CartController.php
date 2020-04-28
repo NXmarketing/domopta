@@ -9,6 +9,7 @@
 namespace app\controllers;
 
 use app\models\Cart;
+use app\models\Products;
 use app\models\CartDetails;
 use app\models\CartSearch;
 use app\models\Order;
@@ -47,7 +48,7 @@ class CartController extends Controller
 
         $total = Cart::getAmount();
 	    $total['sum'] = $total['sum'];
-        $total['row'] = number_format($detail->getSum(),2, ', <span>', '') . '</span>';
+        $total['row'] = Products::formatPrice($detail->getSum());
         if($detail->cart->product->pack_quantity > 0) {
             $total['row_amount'] = $detail->amount * $detail->cart->product->pack_quantity;
         } else {

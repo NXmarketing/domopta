@@ -248,8 +248,8 @@ class Products extends \yii\db\ActiveRecord
 
     public function afterFind()
     {
-        $this->price = number_format($this->price, 2, '.', '');
-        $this->price2 = number_format($this->price2, 2, '.', '');
+        // $this->price = number_format($this->price, 2, '.', '');
+        // $this->price2 = number_format($this->price2, 2, '.', '');
         $this->color = str_replace(',', ', ', $this->color);
     }
 
@@ -285,5 +285,29 @@ class Products extends \yii\db\ActiveRecord
     {
         $colors = explode(',', $this->color);
         return in_array($color, $colors);
+    }
+
+    public static function formatPrice($price)
+    {
+        if (ceil($price * 100) == intVal(ceil($price) . '00')) {
+            return number_format($price, 0, '', '');
+        } else {
+            return number_format($price, 2, ', <span class="kopeyki">', '') . '</span>';
+        }
+    }
+
+    public static function formatEmailPrice($price, $cur = false)
+    {
+        if ($price) {
+            if (ceil($price * 100) == intVal(ceil($price) . '00')) {
+                $return = number_format($price, 0, ',', "");
+                if($cur) $return .= 'руб.';
+            } else {
+                $return = number_format($price, 2, ',', "");
+                if($cur) $return .= 'руб.';
+            }
+        } else
+            return '-';
+            return $return;
     }
 }

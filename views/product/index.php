@@ -126,7 +126,7 @@ $next = $category->getNextproduct($model->id);
                             </div>
                         <?php endif; ?>
 
-                        <ul class="photos-tovar__list_p  <?php if (count($pictures) < 1) echo 'tovar__one' ?>">
+                        <ul class="photos-tovar__list_p  <?php if (count($pictures) < 2) echo 'tovar__one' ?>">
 
                             <?php if (!empty($pictures)): ?>
                                 <?php

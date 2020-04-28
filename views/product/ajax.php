@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                                         <use xlink:href="/img/sprite-sheet.svg#arrow2-right" /></svg></span></div>
                         </div>
                     <?php endif; ?>
-                    <ul class="photos-tovar__list_pp <?php if (count($pictures) < 1) echo 'tovar__one' ?>">
+                    <ul class="photos-tovar__list_pp <?php if (count($pictures) < 2) echo 'tovar__one' ?>">
                         <?php if (!empty($pictures)) : ?>
                             <?php
                             $i = 0;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: resh
@@ -16,6 +17,7 @@ use app\models\User;
 use app\models\UserFile;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
+use app\models\Profile;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
@@ -40,20 +42,22 @@ class RegController extends Controller
 		];
 	}
 
-	public function actionStep1(){
+	public function actionStep1()
+	{
 		$model = new MobRegForm();
 		$model->scenario = 'step1';
 		return $this->renderAjax('step1', ['model' => $model]);
 	}
 
-	public function actionStep1validation(){
+	public function actionStep1validation()
+	{
 		$model = new MobRegForm();
 		$model->scenario = 'step1';
 
 		$model->load(\Yii::$app->request->post());
 		$errors = ActiveForm::validate($model);
-		if(!empty($errors)) {
-			return Json::encode( $errors );
+		if (!empty($errors)) {
+			return Json::encode($errors);
 		}
 
 		$user = new User();
@@ -63,7 +67,7 @@ class RegController extends Controller
 		$phone = str_replace(' ', '', $phone);
 
 		$user->username = $phone;
-		$user->phone_code = rand(100000,999999);
+		$user->phone_code = rand(100000, 999999);
 		$user->createMob();
 
 		return Json::encode([
@@ -73,18 +77,19 @@ class RegController extends Controller
 	}
 
 
-	public function actionStep2validation(){
+	public function actionStep2validation()
+	{
 		$model = new MobRegForm();
 		$model->scenario = 'step2';
 
 		$model->load(\Yii::$app->request->post());
 		$errors = ActiveForm::validate($model);
-		if(!empty($errors)) {
-			return Json::encode( $errors );
+		if (!empty($errors)) {
+			return Json::encode($errors);
 		}
 
 		$user = User::findOne(['username' => $model->phone2, 'phone_code' => $model->code]);
-		if($user){
+		if ($user) {
 			$user->confirm();
 		}
 
@@ -96,35 +101,52 @@ class RegController extends Controller
 		]);
 	}
 
-	public function actionFull(){
+	public function actionFull($step, $type = 0)
+	{
 		$user = User::findOne(\Yii::$app->user->id);
 		$profile = $user->profile;
-		if($user->load(\Yii::$app->request->post()) & $profile->load(\Yii::$app->request->post())){
-			$user->docs = UploadedFile::getInstances($user, 'docs');
-			if($profile->type == 3){
-			    $user->flags = 1;
-            }
-			if(\Yii::$app->request->post('agree') != 1 && $user->validate() & $profile->validate() && InnValidator::validate($user, $profile)){
-				$user->save();
-				$profile->save();
-				foreach ($user->docs as $doc){
-					$name = uniqid() . '.' . $doc->extension;
-//					print_r('upload/docs/' . $name); die();
-					$doc->saveAs('upload/docs/' . $name);
-					$file = new UserFile();
-					$file->user_id = $user->id;
-					$file->filename = $name;
-					$file->save();
+		switch ($step) {
+			case 1:
+				if (in_array($type, [1, 2, 3])) {
+					\Yii::$app->db->createCommand('UPDATE ' . Profile::tableName() . ' SET type=:type WHERE user_id=:user_id')
+						->bindValue(':type', $type)
+						->bindValue(':user_id', $profile->user_id)
+						->execute();
+					return $this->redirect('/reg/full?step=2');
 				}
-				if(!empty($user->email)){
-				    $user->sendEmail('confirm');
-                }
-				\Yii::$app->session->setFlash('reg-success');
-				$user->activate();
-				return $this->redirect(['/user/settings/networks']);
-			}
+				if ($profile->type) return $this->redirect(['reg/full', 'step' => 2]);
+				return $this->render('full/step1', ['user' => $user, 'profile' => $profile]);
+				break;
+			case 2:
+				if (!$profile->type) return $this->redirect(['reg/full', 'step' => 1]);
+				if ($user->load(\Yii::$app->request->post()) & $profile->load(\Yii::$app->request->post())) {
+					$user->docs = UploadedFile::getInstances($user, 'docs');
+					if ($profile->type == 3) {
+						$user->flags = 1;
+					}
+					if (\Yii::$app->request->post('agree') != 1 && $user->validate() & $profile->validate() && InnValidator::validate($user, $profile)) {
+						$user->save();
+						$profile->save();
+						foreach ($user->docs as $doc) {
+							$name = uniqid() . '.' . $doc->extension;
+							$doc->saveAs('upload/docs/' . $name);
+							$file = new UserFile();
+							$file->user_id = $user->id;
+							$file->filename = $name;
+							$file->save();
+						}
+						if (!empty($user->email)) {
+							$user->sendEmail('confirm');
+						}
+						\Yii::$app->session->setFlash('reg-success');
+						$user->activate();
+						return $this->redirect(['/user/settings/networks']);
+					}
+				}
+				return $this->render('full/step2', ['user' => $user, 'profile' => $profile]);
+				break;
+			default:
+				break;
 		}
-		return $this->render('index', ['user' => $user, 'profile' => $profile]);
 	}
-
 }

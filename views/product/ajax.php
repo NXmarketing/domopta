@@ -276,7 +276,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => $model->slug
                     <?php if (!Yii::$app->user->isGuest) : ?>
                         <div class="tovar__help">
                             <?php if ($model->flag == 1) : ?>
-                                ДЛЯ ЗАКАЗА ТОВАРОВ ВАМ НЕОБХОДИМО ПРОЙТИ ПОЛНУЮ <a href="/reg/full" class="reg-link">РЕГИСТРАЦИЮ</a>
+                                ДЛЯ ЗАКАЗА ТОВАРОВ ВАМ НЕОБХОДИМО ПРОЙТИ ПОЛНУЮ <a href="/reg/full?step=1" class="reg-link">РЕГИСТРАЦИЮ</a>
                             <?php endif; ?>
                         </div>
                     <?php else : ?>

@@ -118,7 +118,7 @@ $this->registerJsFile('/js/lightslider.js', ['depends' => \yii\web\JqueryAsset::
                             <?php else : ?>
                                 <?php if (Yii::$app->user->identity->profile->name == '') : ?>
                                     <li class="reg-enter-header__item">
-                                        <a href="/reg/full" class="reg-enter-header__link">Регистрация</a>
+                                        <a href="/reg/full?step=1" class="reg-enter-header__link">Регистрация</a>
                                     </li>
                                 <?php else : ?>
                                     <li class="reg-enter-header__item">
@@ -140,8 +140,8 @@ $this->registerJsFile('/js/lightslider.js', ['depends' => \yii\web\JqueryAsset::
                                 </span>
                             </a>
                         <?php else : ?>
-                            <?php if (Yii::$app->user->identity->profile->name == '') : ?>
-                                <a href="/reg/full" class="reg-enter-header__btn reg-enter-header__icon icon-help">
+                            <?php if (!Yii::$app->user->identity->profile->type) : ?>
+                                <a href="/reg/step1" class="reg-enter-header__btn reg-enter-header__icon icon-help">
                                     <svg class="svg reg-enter-header__svg reg-enter-header__svg_user">
                                         <use xlink:href="/img/sprite-sheet.svg#user" />
                                     </svg>

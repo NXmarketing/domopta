@@ -255,6 +255,8 @@ $this->registerJsFile('/js/lightslider.js',['depends' => \yii\web\JqueryAsset::c
 	                        <?php $cart = Cart::getAmount(); ?>
                             <div class="cart-header__total">Всего: <span id="cart_amount"><?php echo $cart['amount'] ?></span> шт.</div>
                             <div class="cart-header__amount">Сумма: <span id="cart_sum"><?php echo $cart['sum'] ?></span></div>
+<!--                            <div class="cart-header__total">Всего: <span id="cart_amount">408</span> шт.</div>-->
+<!--                            <div class="cart-header__amount">Сумма: <span id="cart_sum">281555,00</span></div>-->
                         </div>
                     </a>
                 </div>

@@ -356,14 +356,14 @@ $next = $category->getNextproduct($model->id);
                         <?php if (!Yii::$app->user->isGuest): ?>
                             <div class="tovar__help">
                                 <?php if ($model->flag == 1): ?>
-                                    ДЛЯ ЗАКАЗА ТОВАРОВ ВАМ НЕОБХОДИМО ПРОЙТИ ПОЛНУЮ <a href="/reg/full"
+                                    ДЛЯ ЗАКАЗА ТОВАРОВ ВАМ НЕОБХОДИМО ПРОЙТИ ПОЛНУЮ <a href="/reg/full?step=1"
                                                                                        class="reg-link">РЕГИСТРАЦИЮ</a>
                                 <?php endif; ?>
                             </div>
                         <?php else: ?>
                             <div class="tovar__help">
                                 <?php if ($model->flag == 1): ?>
-                                    ДЛЯ ЗАКАЗА ТОВАРОВ ВАМ НЕОБХОДИМО ПРОЙТИ ПОЛНУЮ <a href="/reg/full" class="reg-link"
+                                    ДЛЯ ЗАКАЗА ТОВАРОВ ВАМ НЕОБХОДИМО ПРОЙТИ ПОЛНУЮ <a href="/reg/full?step=1" class="reg-link"
                                                                                        id="reg2">РЕГИСТРАЦИЮ</a>
                                 <?php endif; ?>
                             </div>

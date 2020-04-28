@@ -35,8 +35,8 @@ class CabinetController extends Controller {
 		$user = User::findOne(\Yii::$app->user->id);
 		$email = $user->email;
 		$profile = $user->profile;
-		if($user->profile->name == ''){
-			return $this->redirect(['reg/full']);
+		if(!$user->profile->type){
+			return $this->redirect(['reg/full?step=1']);
 		}
 		$user->scenario = 'cabinet';
 		if($user->load(\Yii::$app->request->post()) && $user->save()){

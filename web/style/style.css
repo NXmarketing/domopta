@@ -8376,3 +8376,6 @@ label.file-input{
 .reg-pop-inner-cart {
     padding: 25px;
 }
+.reg-step-1{
+    display:flex;
+}

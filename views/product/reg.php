@@ -2,7 +2,7 @@
 	<div class="reg-pop-inner reg-pop-inner-fav">
 		<div class="reg-pop__step1 reg-pop__step1_block">
 			<span>Для оформления заказа пройдите полную</span> 
-			<a href="/reg/full">регистрацию</a>
+			<a href="/reg/full?step=1">регистрацию</a>
 		</div>
 		<a href="#" id="esc" class="esc">
 			<div class="esc__icon esc__icon_cross1">

@@ -20,23 +20,16 @@ class Profile extends \dektrium\user\models\Profile
         $rules[] = [['lastname', 'name', 'surname'], 'required'];
         $rules[] = [['lastname', 'name', 'surname'], 'match', 'pattern' => '/[а-яА-ЯёЁ]+/u'];
         $rules[] = ['city', 'required'];
-//        $rules[] = ['location', 'required'];
         $rules[] = ['region', 'required'];
-//        $rules[] = ['phone', 'required'];
         $rules[] = ['organization_name', 'required', 'when' => function($model){
             return in_array($model->type, ['ooo', 'sp']);
         }];
         $rules[] = ['inn', 'required', 'when' => function($model){
             return $model->type != 2;
         }];
-        $rules[] = ['ogrn', 'safe',
-//	        'when' => function($model){
-//	        return $model->organization_name != '';
-//        }
-        ];
+        $rules[] = ['ogrn', 'safe'];
 
         $rules[] = ['inn', 'match', 'pattern' => '/(^[0-9]{10,15}$)/u'];
-//        $rules[] = ['users_comment', 'required'];
 
         $rules[] = [['lastname', 'name', 'surname', 'city', 'region'], 'filter', 'filter' => function($value){
             $str = mb_strtolower($value);

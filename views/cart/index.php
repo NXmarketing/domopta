@@ -75,7 +75,7 @@ $total = \app\models\Cart::getAmount();
                                                         if ($detail->color == 'default' && $item->product->flag) {
                                                             $str .= '<span></span><br />';
                                                         } elseif ($detail->color == 'default' && !$item->product->flag) {
-                                                            $str .= '<span></span><br />';
+                                                            $str .= '<span class="cart_selled"></span><br />';
                                                         } elseif ($item->product->hasColor($detail->color)) {
                                                             $str .= '<span>' . $detail->color . '</span><br />';
                                                         } else {

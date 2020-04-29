@@ -10,7 +10,7 @@ use yii\helpers\Html;
 		'dataProvider' => $dataProvider,
 		'columns' => [
 			[
-				'label' => 'ФИО, город',
+				'label' => 'ФИО',
 				'value' => function ($model) {
 					return $model->profile->lastname . ' ' . $model->profile->name . ' ' . $model->profile->surname;
 				}

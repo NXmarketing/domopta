@@ -1,8 +1,10 @@
 <?php
+
 /**
  * @var $this \yii\web\View
  * @var $cart \app\models\Cart[]
  */
+
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\grid\ActionColumn;
@@ -22,7 +24,7 @@ $total = \app\models\Cart::getAmount();
                 <div class="finger">
                     <div class="finger__icon">
                         <svg class="finger__svg">
-                            <use xlink:href="/img/sprite-sheet.svg#finger"/>
+                            <use xlink:href="/img/sprite-sheet.svg#finger" />
                         </svg>
                     </div>
                     <div class="finger__text">
@@ -39,135 +41,136 @@ $total = \app\models\Cart::getAmount();
                         <div class="table-cart">
                             <table>
                                 <thead>
-                                <tr>
-                                    <th>Товар</th>
-                                    <th>Цвет</th>
-                                    <th>Цена (шт)</th>
-                                    <th>Шт. в уп.</th>
-                                    <th>кол-во</th>
-                                    <th>Кол-во шт. всего</th>
-                                    <th>сумма</th>
-                                    <th>операция</th>
-                                </tr>
+                                    <tr>
+                                        <th>Товар</th>
+                                        <th>Цвет</th>
+                                        <th>Цена (шт)</th>
+                                        <th>Шт. в уп.</th>
+                                        <th>кол-во</th>
+                                        <th>Кол-во шт. всего</th>
+                                        <th>сумма</th>
+                                        <th>операция</th>
+                                    </tr>
                                 </thead>
                                 <tbody class="cart-main__item">
-                                <?php foreach ($cart as $item): 
-                                if(!$item->product) continue;
-                                ?>
-                                <tr>
-                                    <td rowspan="2" class="first-td">
-                                        <div class="photos-tovar__item cart-main__pic">
-                                            <a href="<?php echo $item->product->slug ?>" target="_blank">
-                                            <img src="<?php echo isset($item->product->pictures[0])?$item->product->pictures[0]->getUrl('small'):'/img/d.jpg' ?>" alt="img" class="photos-tovar__img cart-main__img">
-                                            </a>
-                                        </div>
-                                        <span><?php echo $item->product->article?></span>
-                                    </td>
-                                    <td colspan="7" class="cart-main__item-desc thcart1"><span><?php echo $item->product->name ?></span></td>
-                                </tr>
-                                <tr>
-                                    <td><?php
-	                                    $str = '';
-	                                    foreach ($item->details as $detail){
-		                                    if($detail->amount >0){
-                                                if($detail->color == 'default'){
-                                                    $str .= '<span></span><br />';
+                                    <?php foreach ($cart as $item) :
+                                        if (!$item->product) continue;
+                                    ?>
+                                        <tr>
+                                            <td rowspan="2" class="first-td">
+                                                <div class="photos-tovar__item cart-main__pic">
+                                                    <a href="<?php echo $item->product->slug ?>" target="_blank">
+                                                        <img src="<?php echo isset($item->product->pictures[0]) ? $item->product->pictures[0]->getUrl('small') : '/img/d.jpg' ?>" alt="img" class="photos-tovar__img cart-main__img">
+                                                    </a>
+                                                </div>
+                                                <span><?php echo $item->product->article ?></span>
+                                            </td>
+                                            <td colspan="7" class="cart-main__item-desc thcart1"><span><?php echo $item->product->name ?></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php
+                                                $str = '';
+                                                foreach ($item->details as $detail) {
+                                                    if ($detail->amount > 0) {
+                                                        if ($detail->color == 'default' && $item->product->flag) {
+                                                            $str .= '<span></span><br />';
+                                                        } elseif ($detail->color == 'default' && !$item->product->flag) {
+                                                            $str .= '<span></span><br />';
+                                                        } elseif ($item->product->hasColor($detail->color)) {
+                                                            $str .= '<span>' . $detail->color . '</span><br />';
+                                                        } else {
+                                                            $str .= '<span class="cart_selled">' . $detail->color . '</span><br />';
+                                                        }
+                                                    }
                                                 }
-		                                        elseif($item->product->hasColor($detail->color)){
-                                                    $str .= '<span>' . $detail->color . '</span><br />';
-                                                } else {
-                                                    $str .= '<span class="cart_selled">' . $detail->color . '</span><br />';
+                                                echo $str;
+                                                ?></td>
+                                            <td><?php
+                                                $str = '';
+                                                foreach ($item->details as $detail) {
+                                                    if ($detail->amount > 0) {
+                                                        if (Yii::$app->user->identity->profile->type == 1 || Yii::$app->user->identity->profile->type == 3) {
+                                                            $str .= Products::formatPrice($item->product->price) . '<br />';
+                                                        } elseif (Yii::$app->user->identity->profile->type == 2) {
+                                                            $str .= Products::formatPrice($item->product->price2) . '<br />';
+                                                        }
+                                                    }
                                                 }
-		                                    }
-	                                    }
-	                                    echo $str;
-                                        ?></td>
-                                    <td><?php
-	                                    $str = '';
-	                                    foreach ($item->details as $detail){
-		                                    if($detail->amount >0){
-		                                        if(Yii::$app->user->identity->profile->type == 1 || Yii::$app->user->identity->profile->type == 3) {
-			                                        $str .= Products::formatPrice($item->product->price) . '<br />';
-		                                        } elseif (Yii::$app->user->identity->profile->type == 2){
-			                                        $str .= Products::formatPrice($item->product->price2) . '<br />';
+                                                echo $str;
+                                                ?></td>
+                                            <td>
+                                                <?php $str = '';
+                                                foreach ($item->details as $detail) {
+                                                    if ($detail->amount > 0) {
+                                                        $str .= ($item->product->pack_quantity ? $item->product->pack_quantity : 1) . '<br />';
+                                                    }
                                                 }
-		                                    }
-	                                    }
-	                                    echo $str;
-	                                    ?></td>
-                                    <td>
-                                        <?php $str = '';
-                                        foreach ($item->details as $detail){
-	                                        if($detail->amount >0){
-		                                        $str .= ($item->product->pack_quantity?$item->product->pack_quantity:1) . '<br />';
-	                                        }
-                                        }
-                                        echo $str;
-                                        ?>
-                                    </td>
-                                    <td class="input-td"><?php $str = '';
-	                                    foreach ($item->details as $detail){
-		                                    if($detail->amount >0){
-                                                if($item->product->pack_quantity){
-                                                    $shtup = 'уп.';
-                                                } else {
-                                                    $shtup = 'шт.';
+                                                echo $str;
+                                                ?>
+                                            </td>
+                                            <td class="input-td"><?php $str = '';
+                                                                    foreach ($item->details as $detail) {
+                                                                        if ($detail->amount > 0) {
+                                                                            if ($item->product->pack_quantity) {
+                                                                                $shtup = 'уп.';
+                                                                            } else {
+                                                                                $shtup = 'шт.';
+                                                                            }
+                                                                            $str .= Html::input('number', 'color[' . $detail->color . ']', $detail->amount, ["min" => "1", 'class' => 'cart-main__amount', 'data-id' => $detail->id]) . $shtup . '<br />';
+                                                                        }
+                                                                    }
+                                                                    echo $str;
+                                                                    ?></td>
+                                            <td><?php $str = '';
+                                                foreach ($item->details as $detail) {
+                                                    if ($detail->amount > 0) {
+                                                        $str .= '<span data-id="' . $detail->id . '" class="detail-amount">' . ($item->product->pack_quantity ? $item->product->pack_quantity : 1) * $detail->amount . '</span><br />';
+                                                    }
                                                 }
-			                                    $str .= Html::input('number','color[' . $detail->color .']', $detail->amount, ["min"=>"1",'class' => 'cart-main__amount', 'data-id' => $detail->id] ) . $shtup .'<br />';
-		                                    }
-	                                    }
-	                                    echo $str;
-	                                    ?></td>
-                                    <td><?php $str = '';
-	                                    foreach ($item->details as $detail){
-		                                    if($detail->amount >0){
-			                                    $str .= '<span data-id="'.$detail->id.'" class="detail-amount">' . ($item->product->pack_quantity?$item->product->pack_quantity:1) * $detail->amount . '</span><br />';
-		                                    }
-	                                    }
-	                                    echo $str;
-	                                    ?></td>
-                                    <td>
-                                        <?php
-                                        $str = '';
-                                        foreach ($item->details as $detail){
-	                                        if($detail->amount >0){
-		                                        $quantity = $item->product->pack_quantity?$item->product->pack_quantity:1;
-		                                        $str .= '<span class="detail-sum" data-id="'.$detail->id.'" >' . Products::formatPrice($item->product->getUserPrice() * $quantity * $detail->amount) . '</span><br />';
-	                                        }
-                                        }
-                                        echo $str;
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <?php
-                                        $str = '';
-                                        foreach ($item->details as $detail){
-	                                        if($detail->amount >0){
-                                                $fill_class = "";
-	                                            if($detail->color != 'default' && !$item->product->hasColor($detail->color)){
-	                                                $fill_class = "fill_red";
+                                                echo $str;
+                                                ?></td>
+                                            <td>
+                                                <?php
+                                                $str = '';
+                                                foreach ($item->details as $detail) {
+                                                    if ($detail->amount > 0) {
+                                                        $quantity = $item->product->pack_quantity ? $item->product->pack_quantity : 1;
+                                                        $str .= '<span class="detail-sum" data-id="' . $detail->id . '" >' . Products::formatPrice($item->product->getUserPrice() * $quantity * $detail->amount) . '</span><br />';
+                                                    }
                                                 }
-		                                        $str .= Html::a('<svg class="svg cart-main-btn__svg cart-main-btn__svg_cross1 '.$fill_class.'">
+                                                echo $str;
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php
+                                                $str = '';
+                                                foreach ($item->details as $detail) {
+                                                    if ($detail->amount > 0) {
+                                                        $fill_class = "";
+                                                        if (($detail->color != 'default' || !$item->product->flag) && !$item->product->hasColor($detail->color)) {
+                                                            $fill_class = "fill_red";
+                                                        }
+                                                        $str .= Html::a('<svg class="svg cart-main-btn__svg cart-main-btn__svg_cross1 ' . $fill_class . '">
                                                 <use xlink:href="/img/sprite-sheet.svg#cross1"/>
                                             </svg>', ['delete', 'id' => $detail->id], [
-				                                        'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-				                                        'data-method' => 'post',
-				                                        'title' => 'Удалить из корзины',
-				                                        'alt' => 'Удалить из корзины',
-                                                        'class' => 'cart-main-btn cart-main-btn__icon'
-			                                        ]) . '<br />';
-	                                        }
-                                        }
-                                        echo $str;
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="8" class="td-bottom">
-                                        <?php echo Html::textInput('memo', $item->memo, ['data-id' => $item->id, 'class' => 'cart-main__comment memo', 'placeholder' => 'Примечание:']) ?>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
+                                                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                                            'data-method' => 'post',
+                                                            'title' => 'Удалить из корзины',
+                                                            'alt' => 'Удалить из корзины',
+                                                            'class' => 'cart-main-btn cart-main-btn__icon'
+                                                        ]) . '<br />';
+                                                    }
+                                                }
+                                                echo $str;
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8" class="td-bottom">
+                                                <?php echo Html::textInput('memo', $item->memo, ['data-id' => $item->id, 'class' => 'cart-main__comment memo', 'placeholder' => 'Примечание:']) ?>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -180,13 +183,13 @@ $total = \app\models\Cart::getAmount();
                         руб.
                     </div>
                     <div class="btn-black form-tovar__btn-black">
-	                    <?php echo Html::a('Оформить заказ', ['/cart/order'], ['class' => 'btn-black__link order_link']); ?>
+                        <?php echo Html::a('Оформить заказ', ['/cart/order'], ['class' => 'btn-black__link order_link']); ?>
                     </div>
 
                 </div>
             </div>
         </div>
-        <div class="content-right">  
+        <div class="content-right">
             <div class="user-btns">
                 <div class="content__title">Личный кабинет</div>
                 <ul class="user-btns__list">
@@ -203,7 +206,7 @@ $total = \app\models\Cart::getAmount();
                         <a href="/site/logout" class="user-btns__link">Выход</a>
                     </li>
                 </ul>
-            </div> 
+            </div>
         </div>
     </div>
 </div>
@@ -218,7 +221,7 @@ $total = \app\models\Cart::getAmount();
         <a href="#" id="esc" class="esc">
             <div class="esc__icon esc__icon_cross1">
                 <svg class="svg esc__svg esc__svg_cross1">
-                    <use xlink:href="/img/sprite-sheet.svg#cross1"/>
+                    <use xlink:href="/img/sprite-sheet.svg#cross1" />
                 </svg>
             </div>
         </a>

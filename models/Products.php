@@ -284,7 +284,7 @@ class Products extends \yii\db\ActiveRecord
     public function hasColor($color)
     {
         $colors = explode(',', $this->color);
-        return in_array($color, $colors);
+        return in_array(trim($color), $colors);
     }
 
     public static function formatPrice($price)

@@ -308,8 +308,8 @@ class User extends \dektrium\user\models\User
         $return .= "<th>Название</th>";
         $return .= "<th>Цвет</th>";
         $return .= "<th class=\"text-center\">Кол-во</th>";
-        $return .= "<th class=\"text-right\">Цена за ед.</th>";
-        $return .= "<th class=\"text-right\">Сумма</th>";
+        $return .= "<th class=\"text-center\">Цена за ед.</th>";
+        $return .= "<th class=\"text-center\">Сумма</th>";
         $return .= "<th class=\"text-right\">Cтатус</th>";
         $return .= "<th class=\"text-center\">Дата</th>";
         $return .= "</tr>";
@@ -335,17 +335,21 @@ class User extends \dektrium\user\models\User
                 $return .= "<td class=\"text-center\">";
                 $return .= $detail->amount;
                 $return .= "</td>";
-                $return .= "<td class=\"text-right text-nowrap\">";
+                $return .= "<td class=\"text-center text-nowrap\">";
                 $return .= Products::formatPrice($detail->getPrice());
                 $return .= "</td>";
-                $return .= "<td class=\"text-right text-nowrap\">";
+                $return .= "<td class=\"text-center text-nowrap\">";
                 $return .= Products::formatPrice($detail->getSum());
                 $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
-                $return .= $cart->product->flag ? 'В&nbsp;наличии' : '<span style="color:red;">Продан</span>';
+                $sold = false;
+                if (($detail->color != 'default' || !$cart->product->flag) && !$cart->product->hasColor($detail->color)) {
+                    $sold = true;
+                }
+                $return .= !$sold ? 'В&nbsp;наличии' : '<span style="color:red;">Продан</span>';
                 $return .= "</td>";
                 $return .= "<td class=\"text-center\">";
-                $return .= str_replace(" ", "&nbsp;", date("H:i d.m.y", $cart->created_at));
+                $return .= str_replace(" ", "&nbsp;", date("d.m.y  (H:i)", $cart->created_at));
                 $return .= "</td>";
                 $return .= "</tr>";
                 $sum += $detail->getSum();

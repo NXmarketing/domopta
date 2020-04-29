@@ -15,7 +15,7 @@ use yii\helpers\Html;
 <div class="catalog main__catalog">
     <div class="container container_dir-col">
 	    <?= Yii::$app->params['page']->text; ?>
-        <div class="main__title">Каталог товаров оптом</div>
+        <!-- <div class="main__title">Каталог товаров оптом</div> -->
         <ul class="catalog__list">
 
 	        <?php foreach ($categories as $category): ?>

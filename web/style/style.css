@@ -5816,15 +5816,8 @@ label.file-input {
     position: relative;
 }
 
-.icon-help:hover .help {
-    opacity: 1;
-    visibility: visible;
-}
-
 .help {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+    display:none;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -5833,12 +5826,22 @@ label.file-input {
     transition: all 400ms ease;
     -webkit-transition-delay: 500ms;
     transition-delay: 500ms;
-    opacity: 0;
-    visibility: hidden;
     top: 120%;
     width: 180px;
     left: calc(50% - 90px);
     z-index: 2;
+}
+
+.icon-help:hover .help {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.svg.product__svg.product__svg_heart2:hover + .help{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .help__text {

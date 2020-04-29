@@ -703,7 +703,7 @@ $(document).ready(function () {
       $.get("/favorites/add", { product_id: $(this).data("id") }, function (
         response
       ) {
-        //$('.log-pop').html(response).addClass('log-pop_flex');
+        $('.log-pop').html(response).addClass('log-pop_flex');
       });
     }
   });

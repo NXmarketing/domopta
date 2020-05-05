@@ -10,6 +10,7 @@ namespace app\modules\admin\controllers;
 
 
 use app\models\Products;
+use yii\helpers\Inflector;
 use app\models\ProductsImages;
 use yii\httpclient\Client;
 use yii\web\Controller;
@@ -44,7 +45,7 @@ class TestController extends Controller {
         $model = Products::findOne($id);
         $arr = [];
         if($model){
-            $model_images = ProductsImages::find()->where(['product_id' => $model->id])->all();
+            $model_images = ProductsImages::find()->where(['folder' => Inflector::slug($model->article_index)])->all();
             $max_order = 0;
             foreach ($model_images as $model_image){
                 if($max_order < $model_image->order){
@@ -56,7 +57,7 @@ class TestController extends Controller {
             $files = UploadedFile::getInstances($model, 'images');
             foreach ($files as $k => $file){
                 $fname = uniqid() . '.' . $file->extension;
-                $path = \Yii::getAlias('@webroot/upload/product/' . $model->id. '/');
+                $path = \Yii::getAlias('@webroot/upload/product/' . Inflector::slug($model->article_index). '/');
                 @mkdir($path);
                 $file->saveAs($path . $fname);
 
@@ -69,7 +70,7 @@ class TestController extends Controller {
 
                 $model1 = new ProductsImages();
                 $model1->image = $fname;
-                $model1->product_id = $model->id;
+                $model1->folder = Inflector::slug($model->article_index);
                 $model1->order = $max_order + $k;
                 $model1->save();
 

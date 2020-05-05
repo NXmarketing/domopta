@@ -94,7 +94,8 @@ class Products extends \yii\db\ActiveRecord
 
     public function getPictures()
     {
-        return $this->hasMany(ProductsImages::className(), ['product_id' => 'id'])->orderBy('order');
+        return ProductsImages::findAll(['folder' => Inflector::slug($this->article_index)]);
+        // return $this->hasMany(ProductsImages::className(), ['product_id' => 'id'])->orderBy('order');
     }
 
     public function getCategory()
@@ -205,11 +206,11 @@ class Products extends \yii\db\ActiveRecord
         }
         Yii::$app->session->addFlash('success1', 'Из корзин: ' . $cart_i);
 
-        $models = ProductsImages::findAll(['product_id' => $this->id]);
+        $models = ProductsImages::findAll(['folder' => Inflector::slug($this->article_index)]);
         foreach ($models as $model) {
             $model->delete();
         }
-        $path = Yii::getAlias('@webroot/upload/product/' . $this->id . '/');
+        $path = Yii::getAlias('@webroot/upload/product/' . Inflector::slug($this->article_index) . '/');
         @rmdir($path);
 
         $fav = Favorite::findAll(['product_id' => $this->id]);
@@ -283,8 +284,10 @@ class Products extends \yii\db\ActiveRecord
 
     public function hasColor($color)
     {
-        $colors = explode(',', $this->color);
-        return in_array(trim($color), $colors);
+        foreach(explode(',', $this->color) as $clr){
+            if(trim($color) == trim($clr)) return true;
+        }
+        return false;
     }
 
     public static function formatPrice($price)

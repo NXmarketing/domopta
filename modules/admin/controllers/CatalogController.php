@@ -211,7 +211,7 @@ class CatalogController extends Controller
         $model = Products::findOne($id);
         $arr = [];
         if ($model) {
-            $model_images = ProductsImages::find()->where(['product_id' => $model->id])->all();
+            $model_images = ProductsImages::find()->where(['folder' => Inflector::slug($model->article_index)])->all();
             $max_order = 0;
             foreach ($model_images as $model_image) {
                 if ($max_order < $model_image->order) {
@@ -236,7 +236,7 @@ class CatalogController extends Controller
 
                 $model1 = new ProductsImages();
                 $model1->image = $fname;
-                $model1->product_id = $model->id;
+                $model1->folder = Inflector::slug($model->article_index);
                 $model1->order = $max_order + $k;
                 $model1->save();
 
@@ -316,7 +316,7 @@ class CatalogController extends Controller
     {
         $products = Products::findAll(['category_id' => $id]);
         foreach ($products as $product) {
-            ProductsImages::deleteAll(['product_id' => $product->id]);
+            ProductsImages::deleteAll(['folder' => Inflector::slug($product->article_index)]);
         }
         return $this->redirect(['index', 'id' => $id]);
     }

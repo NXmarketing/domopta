@@ -253,7 +253,8 @@ class User extends \dektrium\user\models\User
     {
         $cnt = 0;
         foreach($this->favorite as $favorite){
-            if($favorite->product) ++$cnt;
+            // var_dump($favorite->product);
+            if($favorite->product && !$favorite->product->is_deleted) ++$cnt;
         }
 
         return $cnt;

@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\helpers\Inflector;
 
 use Yii;
 
@@ -8,7 +9,6 @@ use Yii;
  * This is the model class for table "products_images".
  *
  * @property integer $id
- * @property integer $product_id
  * @property string $image
  * @property integer $order
  */
@@ -28,8 +28,8 @@ class ProductsImages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'order'], 'integer'],
-            [['image'], 'string', 'max' => 255],
+            [['order'], 'integer'],
+            [['folder', 'image'], 'string', 'max' => 255],
         ];
     }
 
@@ -40,7 +40,7 @@ class ProductsImages extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
+            'folder' => 'Product Article Index',
             'image' => 'Image',
             'order' => 'Order',
         ];
@@ -55,20 +55,18 @@ class ProductsImages extends \yii\db\ActiveRecord
 
         $suffix = '_domopta.ru';
 
-
-
-        $path = __DIR__ . '/../web' . '/upload/product/' . $this->product_id . '/' . $prefix . "_" . $fnameClean . $suffix . "." . $ext;
+        $path = __DIR__ . '/../web' . '/upload/product/' . $this->folder . '/' . $prefix . "_" . $fnameClean . $suffix . "." . $ext;
 
         if (file_exists($path)) {
-            return '/upload/product/' . $this->product_id . '/' . $prefix . "_" . $fnameClean . $suffix . "." . $ext;
+            return '/upload/product/' . $this->folder. '/' . $prefix . "_" . $fnameClean . $suffix . "." . $ext;
         } else {
-            return '/upload/product/' . $this->product_id . '/' . $prefix . '_' . $this->image;
+            return '/upload/product/' . $this->folder . '/' . $prefix . '_' . $this->image;
         }
     }
 
     public function afterDelete()
     {
-        $path = Yii::getAlias('@webroot/upload/product/' . $this->product_id . '/');
+        $path = Yii::getAlias('@webroot/upload/product/' . $this->folder . '/');
         $files = glob($path . '*' . $this->image);
         foreach ($files as $file) {
             unlink($file);
